@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Platonic Man - The Friendzone Hero</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wght@800;900&amp;family=Work+Sans:wght@400&amp;family=Space+Grotesk:wght@700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wght@100..900&amp;family=Space+Grotesk:wght@100..900&amp;family=Work+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#fffbff",
+                        "surface-container-low": "#f3f3f3",
+                        "on-surface": "#1b1b1b",
+                        "on-secondary-fixed-variant": "#93000c",
+                        "surface": "#f9f9f9",
+                        "inverse-surface": "#303030",
+                        "outline-variant": "#c4c5d9",
+                        "inverse-on-surface": "#f1f1f1",
+                        "surface-variant": "#e2e2e2",
+                        "tertiary-fixed": "#ffe16d",
+                        "on-tertiary-container": "#4c3e00",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#124af0",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#e9c400",
+                        "on-primary-fixed-variant": "#0035be",
+                        "error-container": "#ffdad6",
+                        "primary": "#0040e0",
+                        "secondary-container": "#e51a22",
+                        "on-surface-variant": "#434656",
+                        "surface-container-high": "#e8e8e8",
+                        "on-background": "#1b1b1b",
+                        "on-error": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed": "#dde1ff",
+                        "secondary-fixed-dim": "#ffb4ab",
+                        "inverse-primary": "#b8c3ff",
+                        "secondary-fixed": "#ffdad6",
+                        "surface-dim": "#dadada",
+                        "background": "#f9f9f9",
+                        "surface-container-highest": "#e2e2e2",
+                        "primary-fixed-dim": "#b8c3ff",
+                        "on-secondary-fixed": "#410002",
+                        "on-primary-container": "#efefff",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#c9a900",
+                        "secondary": "#bb0013",
+                        "surface-container": "#eeeeee",
+                        "outline": "#747688",
+                        "on-primary-fixed": "#001356",
+                        "on-tertiary-fixed": "#221b00",
+                        "on-tertiary-fixed-variant": "#544600",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#2e5bff",
+                        "tertiary": "#705d00",
+                        "surface-bright": "#f9f9f9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "offset-shadow": "8px",
+                        "panel-margin": "24px",
+                        "gutter": "16px",
+                        "stroke-width": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Anybody"],
+                        "headline-lg": ["Anybody"],
+                        "headline-lg-mobile": ["Anybody"],
+                        "headline-md": ["Anybody"],
+                        "body-lg": ["Work Sans"],
+                        "body-md": ["Work Sans"],
+                        "label-bold": ["Space Grotesk"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["32px", {"lineHeight": "1.2", "fontWeight": "800"}],
+                        "headline-lg": ["72px", {"lineHeight": "1.0", "letterSpacing": "-0.02em", "fontWeight": "900"}],
+                        "headline-lg-mobile": ["48px", {"lineHeight": "1.0", "fontWeight": "900"}],
+                        "headline-md": ["48px", {"lineHeight": "1.1", "fontWeight": "800"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "label-bold": ["14px", {"lineHeight": "1.2", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .comic-bg {
+            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBX8qc1Ll9LNla9GKXu4zw-egtf5IHs0aTiqx0P0zkq2AUfHQ6YCMMoNQYSyMnQAVLbeTMM7ybzvpNU2d4TZVdaUZ3yFGDbJUqXGPkx6iNpZWT33SWLz0-AGHYYn2cAbcuNzcpzdw1HPV6Sg3tD_4Ps5q9vwSp0LLxZMmANVrLwVAYGBfr0dLGA8D1yRV6TEUJY6NQQg6rFHxv8ZeZyOnfVfy-_dAzRnMnPSrZZmORiftht1KtQ4H_YiA');
+            background-attachment: fixed;
+            background-size: 400px;
+        }
+        .halftone {
+            background-image: radial-gradient(circle, currentColor 1px, transparent 1px);
+            background-size: 4px 4px;
+        }
+        .marquee {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .speech-bubble-tail {
+            position: absolute;
+            bottom: -20px;
+            left: 40px;
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 20px solid #1b1b1b;
+        }
+        .speech-bubble-tail::after {
+            content: '';
+            position: absolute;
+            bottom: 4px;
+            left: -16px;
+            width: 0;
+            height: 0;
+            border-left: 16px solid transparent;
+            border-right: 16px solid transparent;
+            border-top: 16px solid white;
+        }
+
+        /* Particle styles */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            user-select: none;
+        }
+        .particle-inner {
+            position: relative;
+        }
+        .heart-p-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            font-weight: 900;
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            text-shadow: 1px 1px 0px rgba(0,0,0,0.5);
+        }
+
+        /* Poll: persistent selected state (survives after click, not only :hover) */
+        .poll-option.selected {
+            background-color: #0040e0 !important; /* primary blue */
+            color: #ffffff !important;
+        }
+        /* Keep the trailing icon visible on the selected option */
+        .poll-option.selected .material-symbols-outlined {
+            opacity: 1 !important;
+        }
+
+        /* Floating heart (meme like button) */
+        .floating-heart {
+            position: fixed;
+            pointer-events: none;
+            z-index: 100;
+            color: #bb0013; /* secondary red */
+            font-variation-settings: 'FILL' 1;
+            font-size: 40px;
+            user-select: none;
+            will-change: transform, opacity;
+        }
+
+        /* Simple toast (share fallback) */
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: #1b1b1b;
+            color: #ffffff;
+            border: 4px solid #ffffff;
+            box-shadow: 6px 6px 0px 0px rgba(0,0,0,0.4);
+            padding: 12px 20px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 200;
+            opacity: 0;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body class="comic-bg min-h-screen text-on-surface font-body-md overflow-x-hidden">
+<!-- News Ticker (Marquee) -->
+<div class="bg-secondary text-on-secondary py-2 border-b-stroke-width border-on-surface z-50 sticky top-0 marquee">
+<div class="marquee-content font-label-bold text-label-bold uppercase">
+        BREAKING NEWS: Platonic Man is still single! | NEW COMIC: Love in the Friendzone | POLL: What gift should I give today? | BREAKING NEWS: Platonic Man is still single! | NEW COMIC: Love in the Friendzone
+</div>
+</div>
+<!-- TopAppBar -->
+<header class="bg-surface border-b-stroke-width border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] sticky top-[36px] z-40 px-panel-margin py-4 flex justify-between items-center">
+<div class="flex items-center gap-4">
+<img id="header-logo" class="h-16 w-16 border-2 border-on-surface"/>
+<h1 class="font-headline-md text-headline-md italic uppercase text-primary">PLATONIC MAN</h1>
+</div>
+<button class="bg-secondary text-on-secondary px-8 py-3 font-headline-sm text-headline-sm border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95" id="bam-button">
+        BAM!
+    </button>
+</header>
+<main class="max-w-7xl mx-auto px-panel-margin py-12 space-y-gutter">
+<!-- Hero Section -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
+<div class="md:col-span-5 relative group">
+<div class="absolute -inset-2 bg-primary border-stroke-width border-on-surface -rotate-2 group-hover:rotate-0 transition-transform"></div>
+<div class="relative bg-surface border-stroke-width border-on-surface shadow-[12px_12px_0px_0px_rgba(27,27,27,1)] overflow-hidden">
+<img class="w-full h-auto" id="hero-image"/>
+</div>
+</div>
+<div class="md:col-span-7 flex flex-col justify-center items-start">
+<div class="relative bg-white border-stroke-width border-on-surface p-8 shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] mb-8">
+<p class="font-headline-sm text-headline-sm text-on-surface italic" id="bio-quote"></p>
+<div class="speech-bubble-tail"></div>
+</div>
+<div class="bg-tertiary-fixed text-on-tertiary-fixed border-stroke-width border-on-surface p-4 inline-block font-label-bold text-label-bold uppercase transform -rotate-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" id="bio-status"></div>
+</div>
+</section>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Comics (Comic Covers) -->
+<div class="md:col-span-8 bg-surface border-stroke-width border-on-surface p-6 shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] relative overflow-hidden">
+<div class="absolute top-0 left-0 bg-tertiary text-on-tertiary px-4 py-1 border-r-stroke-width border-b-stroke-width border-on-surface font-label-bold z-10">
+                RECENT COMICS
+            </div>
+<div class="grid grid-cols-2 lg:grid-cols-3 gap-4 pt-8">
+<div class="group cursor-pointer">
+<div class="border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none transition-all">
+<img class="w-full aspect-[2/3] object-cover" data-comic="0"/>
+<div class="bg-on-surface text-surface p-2 font-label-bold text-center uppercase" data-comic-caption="0"></div>
+</div>
+</div>
+<div class="group cursor-pointer">
+<div class="border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none transition-all">
+<img class="w-full aspect-[2/3] object-cover" data-comic="1"/>
+<div class="bg-on-surface text-surface p-2 font-label-bold text-center uppercase" data-comic-caption="1"></div>
+</div>
+</div>
+<div class="group cursor-pointer hidden lg:block">
+<div class="border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none transition-all">
+<img class="w-full aspect-[2/3] object-cover" data-comic="2"/>
+<div class="bg-on-surface text-surface p-2 font-label-bold text-center uppercase" data-comic-caption="2"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Poll Card -->
+<div class="md:col-span-4 bg-tertiary-fixed border-stroke-width border-on-surface p-6 shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] flex flex-col">
+<div class="bg-secondary text-on-secondary px-4 py-1 border-stroke-width border-on-surface font-label-bold mb-6 self-start transform -rotate-2" id="poll-label"></div>
+<h3 class="font-headline-sm text-headline-sm mb-6 uppercase" id="poll-question"></h3>
+<div class="space-y-4" id="poll-options">
+<button class="poll-option w-full bg-surface border-stroke-width border-on-surface p-4 font-label-bold text-left hover:bg-primary hover:text-white transition-colors flex justify-between items-center group">
+                    <span class="poll-option-text"></span> <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">favorite</span>
+</button>
+<button class="poll-option w-full bg-surface border-stroke-width border-on-surface p-4 font-label-bold text-left hover:bg-primary hover:text-white transition-colors flex justify-between items-center group">
+                    <span class="poll-option-text"></span> <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">heart_broken</span>
+</button>
+<button class="poll-option w-full bg-surface border-stroke-width border-on-surface p-4 font-label-bold text-left hover:bg-primary hover:text-white transition-colors flex justify-between items-center group">
+                    <span class="poll-option-text"></span> <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity">handshake</span>
+</button>
+</div>
+<div class="mt-auto pt-6 text-on-tertiary-fixed-variant italic text-sm" id="poll-footnote"></div>
+</div>
+<!-- Video Player Widget -->
+<div class="md:col-span-6 self-start bg-primary-container border-stroke-width border-on-surface p-2 shadow-[8px_8px_0px_0px_rgba(27,27,27,1)]">
+<div class="relative bg-black border-stroke-width border-on-surface flex items-center justify-center overflow-hidden" id="video-container" style="aspect-ratio: 16 / 9;">
+<video class="absolute inset-0 w-full h-full object-contain" id="video-player" controls playsinline preload="metadata"></video>
+<button class="z-10 bg-secondary text-white w-20 h-20 rounded-full border-4 border-white shadow-[0_0_20px_rgba(255,255,255,0.5)] flex items-center justify-center hover:scale-110 transition-transform active:scale-95" id="video-play-button" aria-label="Play video">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<div class="absolute bottom-4 left-4 bg-white px-3 py-1 border-2 border-black font-label-bold pointer-events-none" id="video-caption"></div>
+</div>
+<!-- Video actions -->
+<div class="flex gap-4 mt-2">
+<button class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:bg-tertiary transition-colors" id="video-share-button">
+<span class="material-symbols-outlined">share</span> SHARE
+                    </button>
+<button class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:bg-error hover:text-white transition-colors" id="video-like-button">
+<span class="material-symbols-outlined">heart_plus</span> LOL... PAIN
+                    </button>
+</div>
+</div>
+<!-- Meme of the Day -->
+<div class="md:col-span-6 self-start bg-surface border-stroke-width border-on-surface p-6 shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] relative">
+<div class="absolute top-[-15px] right-[20px] bg-secondary text-on-secondary px-6 py-2 border-stroke-width border-on-surface font-headline-sm text-headline-sm rotate-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                MEME OF THE DAY
+            </div>
+<div class="mt-8 border-stroke-width border-on-surface bg-white p-4">
+<div class="relative bg-white border-stroke-width border-on-surface flex items-center justify-center overflow-hidden mb-4" id="meme-container" style="aspect-ratio: 1 / 1;">
+<img class="absolute inset-0 w-full h-full object-contain" id="meme-image"/>
+</div>
+<div class="flex gap-4">
+<button class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:bg-tertiary transition-colors" id="meme-share-button">
+<span class="material-symbols-outlined">share</span> <span id="meme-share-label">SHARE</span>
+                    </button>
+<button class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:bg-error hover:text-white transition-colors" id="meme-like-button">
+<span class="material-symbols-outlined">heart_plus</span> LOL... PAIN
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-on-surface text-surface mt-24 border-t-stroke-width border-on-surface p-panel-margin">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+<div class="flex items-center gap-4">
+<div class="bg-secondary p-2 border-2 border-white">
+<img id="footer-logo" class="h-10 w-10"/>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-secondary uppercase" id="footer-brand">PLATONIC COMICS</h2>
+<p class="font-label-bold text-label-bold text-surface-variant">TRAGICALLY SINGLE SINCE THE SILVER AGE</p>
+</div>
+</div>
+<div class="flex flex-wrap justify-center gap-6">
+<a class="font-label-bold text-label-bold text-surface-variant hover:text-tertiary-fixed transition-colors" href="#">Privacy Policy</a>
+<a class="font-label-bold text-label-bold text-surface-variant hover:text-tertiary-fixed transition-colors" href="#">Hero Terms</a>
+<a class="font-label-bold text-label-bold text-surface-variant hover:text-tertiary-fixed transition-colors" href="#">Fan Art Guide</a>
+</div>
+<div class="font-label-bold text-label-bold text-center md:text-right" id="footer-copyright">
+            © 1962 PLATONIC COMICS
+        </div>
+</div>
+<!-- Social media buttons. Edit the links in siteContent.social (JS below). -->
+<div class="max-w-7xl mx-auto mt-10 pt-8 border-t-2 border-surface-variant flex flex-col items-center gap-4">
+<p class="font-label-bold text-label-bold uppercase text-surface-variant">Follow the hero</p>
+<div class="flex flex-wrap justify-center gap-4">
+<!-- Instagram -->
+<a aria-label="Instagram" data-social="instagram" href="#" class="bg-surface text-on-surface w-14 h-14 border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] flex items-center justify-center hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95">
+<svg fill="none" viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"></rect><circle cx="12" cy="12" r="4"></circle><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"></circle></svg>
+</a>
+<!-- X (Twitter) -->
+<a aria-label="X" data-social="twitter" href="#" class="bg-surface text-on-surface w-14 h-14 border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] flex items-center justify-center hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95">
+<svg fill="none" viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4l16 16M20 4L4 20"></path></svg>
+</a>
+<!-- TikTok -->
+<a aria-label="TikTok" data-social="tiktok" href="#" class="bg-surface text-on-surface w-14 h-14 border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] flex items-center justify-center hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95">
+<svg fill="none" viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 10.5a4 4 0 1 0 4 4V3c.5 2.5 2.5 4.5 5 5"></path></svg>
+</a>
+<!-- Facebook -->
+<a aria-label="Facebook" data-social="facebook" href="#" class="bg-surface text-on-surface w-14 h-14 border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] flex items-center justify-center hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95">
+<svg fill="none" viewBox="0 0 24 24" width="26" height="26" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h-2.5a3.5 3.5 0 0 0-3.5 3.5V10H6v3h3v8h3v-8h2.5l.5-3H12V6.8c0-.6.4-.8 1-.8h2z"></path></svg>
+</a>
+</div>
+</div>
+</footer>
+<!-- Floating Action Button (FAB) - For 'Book a Date' (or Join League) -->
+<div class="fixed bottom-8 right-8 z-50">
+<button class="bg-secondary text-on-secondary w-20 h-20 rounded-full border-stroke-width border-on-surface shadow-[6px_6px_0px_0px_rgba(27,27,27,1)] flex items-center justify-center hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[10px_10px_0px_0px_rgba(27,27,27,1)] transition-all group">
+<span class="material-symbols-outlined text-4xl group-hover:scale-125 transition-transform" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+</button>
+</div>
+<script>
+    /* =========================================================================
+       SITE CONTENT — Edit everything here to change the page's media & copy.
+       You should NOT need to touch the HTML/CSS below to swap images, the video,
+       the polls or the bio. Just update the values in this object.
+       ========================================================================= */
+    const siteContent = {
+        logo: {
+            src: "assets/img/logo.jpg",
+            alt: "Platonic Man logo"
+        },
+        footer: {
+            brand: "PLATONIC COMICS",
+            copyright: "© 1962 PLATONIC COMICS"
+        },
+        heroImage: {
+            src: "assets/img/platonic-man-hero.jpg",
+            alt: "An illustration of Platonic Man: a bald, smiling superhero wearing glasses, a red cape and a blue suit with a yellow heart bearing the letter 'P'. He holds a bouquet of red roses and daisies while standing on a comic-style city street, with a 'PLATONIC MAN' sign and Big Ben in the background."
+        },
+        bio: {
+            quote: "\"Hi! I'm Platonic Man. I have zero luck in love, but I've got plenty of energy to save the day!\"",
+            status: "CURRENT STATUS: FRIENDZONED (AGAIN)"
+        },
+        comics: [
+            {
+                src: "https://lh3.googleusercontent.com/aida-public/AB6AXuBrznstVDJTCs3qZKiFQKbaMpQ65ZwzzGvaroyBJGt_BcFgl9zqOgG2pk2HdJLQA0BLRzTHQ56uyxg0zPsRJkREQKLKk31sGppVYgQjHggE8H6z2lZmGMK91VMUF08_Bsu5uKitKvJCB14VdA_PlyYm7O_nzYJkRvwsdLHdgnBNha-I2IwEoh_yu09V28NPcnAB430aljL30Ky65UdokNiDBBrSvh93AkkfFIsSt7u21DDLVK_TKTMaTw",
+                alt: "A comic book cover titled 'PLATONIC MAN #12: The Dinner Date Disaster'. It features the hero looking devastated at a fancy restaurant while a villainous waiter laughs. High contrast, primary colors, halftone dots on the background.",
+                caption: "Seen 1 min ago"
+            },
+            {
+                src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDSEfxfLclblpYOvPh7759zj40qpdsCvV-7POr4ZsmTWlnZkc8K8SnjxngXu4I3AwQ3kC1DG2hxhfibV3khcHH0ZyBjaTqurPYtpWr_eknpqa1RuViK3EZXRs_ZiZEH6rcOkD5g_nRkQ-qkAn5IEFJn1eS4PEv3bQzvwwTLMkX4WISei8y9mLYsjjqc2CIqsgpXHTsHSbU9z3XmP0DkjXpBG3FdrKvPLUO9avhNSANI4YZfWn2TET4bUg",
+                alt: "A comic book cover titled 'PLATONIC MAN #13: Just Friends Forever'. The hero is carrying heavy boxes for a character he likes. Bold comic font, yellow and red color scheme with thick black outlines.",
+                caption: "NEW!"
+            },
+            {
+                src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDZX5DhQfLE-hW_XQFf8t8kHmiDlSde7I5fmxFoYWYiuq5w-AF079tiRZGMAw19WeVjuyBUs8IG_Piz_yElGBwsg1JSCIar4HEd_zC9ahSHrEM2ZGXODQsvY1fTdUeAXmtB35lOLaQSKUn-9895o9yfTt6RMWPqg-1jsPJiIm69DlUZVHbOIFrSU58bnZTzT2azxXLDtiAYkyGa97QL8kB93FdDmWFNY3gdwL9y93XmZ_Q7dTDGrab17w",
+                alt: "Comic book cover showing Platonic Man heroically saving a cat from a tree, but nobody is watching. Red and blue suit, dramatic shading, vintage paper texture look.",
+                caption: "CLASSIC"
+            }
+        ],
+        video: {
+            src: "assets/video/11-bullies.mp4",
+            poster: "assets/img/video-loading-poster.jpg",
+            alt: "Platonic Man video: 11 Bullies.",
+            caption: "VIDEO: \"11 BULLIES\""
+        },
+        meme: {
+            src: "assets/img/meme-bullies.png",
+            alt: "A comic-style meme of Platonic Man facing off against a group of bullies.",
+            title: "Platonic Man Meme of the Day"
+        },
+        polls: [
+            {
+                label: "POLL OF THE DAY",
+                question: "Do you think she likes me back?",
+                options: ["YES", "NO", "JUST AS FRIENDS"],
+                footnote: "* 1,245 heroes have already voted (most said 'Just friends')."
+            }
+        ],
+        // Social media links — replace "#" with the real profile URLs.
+        social: {
+            instagram: "#",
+            twitter: "#",
+            tiktok: "#",
+            facebook: "#"
+        }
+    };
+
+    /* Inject the siteContent values into the DOM once the page has loaded. */
+    function applySiteContent() {
+        // Logo (header + footer share the same image)
+        document.querySelectorAll('#header-logo, #footer-logo').forEach(logoImg => {
+            logoImg.src = siteContent.logo.src;
+            logoImg.alt = siteContent.logo.alt;
+        });
+
+        // Footer text
+        const footerBrand = document.getElementById('footer-brand');
+        if (footerBrand) footerBrand.textContent = siteContent.footer.brand;
+        const footerCopyright = document.getElementById('footer-copyright');
+        if (footerCopyright) footerCopyright.textContent = siteContent.footer.copyright;
+
+        // Hero image
+        const heroImg = document.getElementById('hero-image');
+        if (heroImg) {
+            heroImg.src = siteContent.heroImage.src;
+            heroImg.alt = siteContent.heroImage.alt;
+            heroImg.setAttribute('data-alt', siteContent.heroImage.alt);
+        }
+
+        // Bio
+        const bioQuote = document.getElementById('bio-quote');
+        if (bioQuote) bioQuote.textContent = siteContent.bio.quote;
+        const bioStatus = document.getElementById('bio-status');
+        if (bioStatus) bioStatus.textContent = siteContent.bio.status;
+
+        // Comics
+        siteContent.comics.forEach((comic, i) => {
+            const img = document.querySelector(`[data-comic="${i}"]`);
+            if (img) {
+                img.src = comic.src;
+                img.alt = comic.alt;
+                img.setAttribute('data-alt', comic.alt);
+            }
+            const caption = document.querySelector(`[data-comic-caption="${i}"]`);
+            if (caption) caption.textContent = comic.caption;
+        });
+
+        // Video
+        const videoPlayer = document.getElementById('video-player');
+        if (videoPlayer) {
+            videoPlayer.src = siteContent.video.src;
+            videoPlayer.poster = siteContent.video.poster;
+            videoPlayer.setAttribute('data-alt', siteContent.video.alt);
+        }
+        const videoCaption = document.getElementById('video-caption');
+        if (videoCaption) videoCaption.textContent = siteContent.video.caption;
+
+        // Meme image — size its container to the image's true aspect ratio
+        // (same dynamic approach as the video), object-contain, no cropping.
+        const memeImage = document.getElementById('meme-image');
+        const memeContainer = document.getElementById('meme-container');
+        if (memeImage) {
+            memeImage.addEventListener('load', () => {
+                const w = memeImage.naturalWidth;
+                const h = memeImage.naturalHeight;
+                if (memeContainer && w && h) {
+                    memeContainer.style.aspectRatio = `${w} / ${h}`;
+                }
+            });
+            memeImage.src = siteContent.meme.src;
+            memeImage.alt = siteContent.meme.alt;
+            memeImage.setAttribute('data-alt', siteContent.meme.alt);
+        }
+
+        // Poll (first poll drives the markup on the page)
+        const poll = siteContent.polls[0];
+        if (poll) {
+            const pollLabel = document.getElementById('poll-label');
+            if (pollLabel) pollLabel.textContent = poll.label;
+            const pollQuestion = document.getElementById('poll-question');
+            if (pollQuestion) pollQuestion.textContent = poll.question;
+            const pollFootnote = document.getElementById('poll-footnote');
+            if (pollFootnote) pollFootnote.textContent = poll.footnote;
+            const optionEls = document.querySelectorAll('#poll-options .poll-option-text');
+            poll.options.forEach((opt, i) => {
+                if (optionEls[i]) optionEls[i].textContent = opt;
+            });
+        }
+
+        // Social links
+        if (siteContent.social) {
+            Object.entries(siteContent.social).forEach(([network, url]) => {
+                const link = document.querySelector(`[data-social="${network}"]`);
+                if (link) link.href = url;
+            });
+        }
+    }
+
+    applySiteContent();
+
+    const bamButton = document.getElementById('bam-button');
+    const particles = ['💔', '❤️', '🧸', '👜'];
+
+    bamButton.addEventListener('click', (e) => {
+        const rect = bamButton.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        createExplosion(centerX, centerY);
+    });
+
+    function createExplosion(x, y) {
+        const particleCount = 20;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particleType = particles[Math.floor(Math.random() * particles.length)];
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            // Special styling for Heart with P
+            if (particleType === '❤️') {
+                particle.innerHTML = `
+                    <div class="particle-inner">
+                        ❤️<span class="heart-p-overlay">P</span>
+                    </div>
+                `;
+            } else {
+                particle.textContent = particleType;
+            }
+
+            // Initial position
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+
+            document.body.appendChild(particle);
+
+            // Random movement parameters
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = 5 + Math.random() * 15;
+            const vx = Math.cos(angle) * velocity;
+            const vy = Math.sin(angle) * velocity;
+            const rotation = (Math.random() - 0.5) * 720; // up to 2 full rotations
+            const duration = 1000 + Math.random() * 1000;
+
+            const startTime = performance.now();
+
+            function animate(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = elapsed / duration;
+
+                if (progress < 1) {
+                    const currentX = x + vx * progress * 20; // multiplier for speed
+                    const currentY = y + vy * progress * 20 + (0.5 * 9.8 * Math.pow(progress * 2, 2) * 10); // add gravity
+                    
+                    particle.style.transform = `
+                        translate(-50%, -50%) 
+                        translate(${currentX - x}px, ${currentY - y}px) 
+                        rotate(${rotation * progress}deg) 
+                        scale(${1.5 - progress})
+                    `;
+                    particle.style.opacity = 1 - progress;
+
+                    requestAnimationFrame(animate);
+                } else {
+                    particle.remove();
+                }
+            }
+
+            requestAnimationFrame(animate);
+        }
+    }
+
+    /* ---------------------------------------------------------------------
+       POLL: reuse the same BAM particle explosion when voting
+       --------------------------------------------------------------------- */
+    document.querySelectorAll('#poll-options button').forEach(optionButton => {
+        optionButton.addEventListener('click', (e) => {
+            // Same effect as the BAM button (reuse, don't duplicate).
+            createExplosion(e.clientX, e.clientY);
+
+            // Mark the chosen option visually (radio-button behaviour: only one).
+            document.querySelectorAll('#poll-options .poll-option').forEach(b => {
+                b.classList.remove('selected');
+            });
+            optionButton.classList.add('selected');
+        });
+    });
+
+    /* ---------------------------------------------------------------------
+       VIDEO: play the real video and hide the overlay play button
+       --------------------------------------------------------------------- */
+    const videoPlayer = document.getElementById('video-player');
+    const videoPlayButton = document.getElementById('video-play-button');
+    const videoContainer = document.getElementById('video-container');
+    if (videoPlayer && videoPlayButton) {
+        // Detect the real orientation and size the container to the true
+        // aspect ratio (vertical or horizontal), instead of forcing 16:9.
+        videoPlayer.addEventListener('loadedmetadata', () => {
+            const w = videoPlayer.videoWidth;
+            const h = videoPlayer.videoHeight;
+            if (videoContainer && w && h) {
+                videoContainer.style.aspectRatio = `${w} / ${h}`;
+            }
+        });
+
+        videoPlayButton.addEventListener('click', () => {
+            videoPlayer.play();
+            videoPlayButton.style.display = 'none';
+        });
+        // Re-show the play button when paused; hide while playing.
+        videoPlayer.addEventListener('pause', () => { videoPlayButton.style.display = 'flex'; });
+        videoPlayer.addEventListener('play', () => { videoPlayButton.style.display = 'none'; });
+        // On end: reset to the initial state — reload so the poster ("video
+        // loading" image) shows again, stay paused, and show the play button.
+        videoPlayer.addEventListener('ended', () => {
+            videoPlayer.currentTime = 0;
+            videoPlayer.load(); // re-displays the poster frame
+            videoPlayButton.style.display = 'flex';
+        });
+    }
+
+    /* ---------------------------------------------------------------------
+       SHARING: Web Share API with clipboard fallback + toast (shared by the
+       meme and the video share buttons — one implementation, two callers).
+       --------------------------------------------------------------------- */
+    function showToast(message) {
+        const toast = document.createElement('div');
+        toast.className = 'toast';
+        toast.textContent = message;
+        document.body.appendChild(toast);
+        // Force reflow so the transition runs, then show.
+        requestAnimationFrame(() => toast.classList.add('show'));
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        }, 1800);
+    }
+
+    async function shareContent({ title, text, url }) {
+        const shareData = { title, text: text || title, url };
+        if (navigator.share) {
+            try {
+                await navigator.share(shareData);
+            } catch (err) {
+                // User cancelled or share failed — no action needed.
+            }
+        } else if (navigator.clipboard && navigator.clipboard.writeText) {
+            try {
+                await navigator.clipboard.writeText(url);
+                showToast('Link copied!');
+            } catch (err) {
+                showToast('Could not copy link');
+            }
+        } else {
+            showToast('Sharing not supported');
+        }
+    }
+
+    const memeShareButton = document.getElementById('meme-share-button');
+    if (memeShareButton) {
+        memeShareButton.addEventListener('click', () => {
+            shareContent({
+                title: siteContent.meme.title,
+                text: siteContent.meme.title,
+                url: siteContent.meme.src
+            });
+        });
+    }
+
+    const videoShareButton = document.getElementById('video-share-button');
+    if (videoShareButton) {
+        videoShareButton.addEventListener('click', () => {
+            // Prefer a direct URL to the video file; fall back to this page.
+            const videoUrl = new URL(siteContent.video.src, window.location.href).href;
+            shareContent({
+                title: siteContent.video.caption,
+                text: siteContent.video.caption,
+                url: videoUrl
+            });
+        });
+    }
+
+    /* ---------------------------------------------------------------------
+       MEME: floating heart on like
+       --------------------------------------------------------------------- */
+    function floatingHeart(x, y) {
+        const heart = document.createElement('span');
+        heart.className = 'material-symbols-outlined floating-heart';
+        heart.textContent = 'favorite';
+        heart.style.left = `${x}px`;
+        heart.style.top = `${y}px`;
+        document.body.appendChild(heart);
+
+        const duration = 1200 + Math.random() * 300; // ~1.2-1.5s
+        const rise = 120 + Math.random() * 60;       // how far up it floats
+        const wobbleAmp = 15 + Math.random() * 10;   // sideways wobble amplitude
+        const startTime = performance.now();
+
+        function animate(currentTime) {
+            const progress = (currentTime - startTime) / duration;
+            if (progress < 1) {
+                const currentY = -rise * progress;
+                const currentX = Math.sin(progress * Math.PI * 3) * wobbleAmp;
+                const scale = 1 + progress * 0.3;
+                heart.style.transform =
+                    `translate(-50%, -50%) translate(${currentX}px, ${currentY}px) scale(${scale})`;
+                heart.style.opacity = 1 - progress;
+                requestAnimationFrame(animate);
+            } else {
+                heart.remove();
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+
+    // Both like buttons (meme + video) reuse the same floating-heart effect.
+    document.querySelectorAll('#meme-like-button, #video-like-button').forEach(likeButton => {
+        likeButton.addEventListener('click', (e) => {
+            floatingHeart(e.clientX, e.clientY);
+        });
+    });
+
+    // Micro-interaction: Smooth hover effects on cards
+    document.querySelectorAll('section > div, main > div > div').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            // Potential for adding "comic burst" particles or subtle tilt
+        });
+    });
+</script>
+</body></html>
