@@ -436,7 +436,6 @@
         meme: {
             type: "video",
             src: "assets/video/memes/meme-2.mp4",
-            poster: "assets/img/video-loading-poster.jpg",
             alt: "Meme del día en video: Platonic Man.",
             title: "Platonic Man Meme of the Day"
         },
@@ -513,7 +512,6 @@
         const memeVideo = document.getElementById('meme-video');
         if (memeVideo) {
             memeVideo.src = siteContent.meme.src;
-            memeVideo.poster = siteContent.meme.poster;
             memeVideo.setAttribute('data-alt', siteContent.meme.alt);
         }
 
