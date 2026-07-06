@@ -317,7 +317,10 @@
             </div>
 <div class="mt-8 border-stroke-width border-on-surface bg-white p-4">
 <div class="relative bg-white border-stroke-width border-on-surface flex items-center justify-center overflow-hidden mb-4" id="meme-container" style="aspect-ratio: 1 / 1;">
-<img class="absolute inset-0 w-full h-full object-contain" id="meme-image"/>
+<video class="absolute inset-0 w-full h-full object-contain" id="meme-video" controls playsinline preload="metadata"></video>
+<button class="z-10 bg-secondary text-white w-20 h-20 rounded-full border-4 border-white shadow-[0_0_20px_rgba(255,255,255,0.5)] flex items-center justify-center hover:scale-110 transition-transform active:scale-95" id="meme-play-button" aria-label="Play meme video">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
 </div>
 <div class="flex gap-4">
 <button class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:bg-tertiary transition-colors" id="meme-share-button">
@@ -431,8 +434,10 @@
             caption: "VIDEO: \"12 VENTRILOQUIST DUMMY\""
         },
         meme: {
-            src: "assets/img/meme-bullies.png",
-            alt: "A comic-style meme of Platonic Man facing off against a group of bullies.",
+            type: "video",
+            src: "assets/video/memes/meme-2.mp4",
+            poster: "assets/img/video-loading-poster.jpg",
+            alt: "Meme del día en video: Platonic Man.",
             title: "Platonic Man Meme of the Day"
         },
         polls: [
@@ -504,21 +509,12 @@
         const videoCaption = document.getElementById('video-caption');
         if (videoCaption) videoCaption.textContent = siteContent.video.caption;
 
-        // Meme image — size its container to the image's true aspect ratio
-        // (same dynamic approach as the video), object-contain, no cropping.
-        const memeImage = document.getElementById('meme-image');
-        const memeContainer = document.getElementById('meme-container');
-        if (memeImage) {
-            memeImage.addEventListener('load', () => {
-                const w = memeImage.naturalWidth;
-                const h = memeImage.naturalHeight;
-                if (memeContainer && w && h) {
-                    memeContainer.style.aspectRatio = `${w} / ${h}`;
-                }
-            });
-            memeImage.src = siteContent.meme.src;
-            memeImage.alt = siteContent.meme.alt;
-            memeImage.setAttribute('data-alt', siteContent.meme.alt);
+        // Meme video (aspect-ratio sizing + play/pause handled below).
+        const memeVideo = document.getElementById('meme-video');
+        if (memeVideo) {
+            memeVideo.src = siteContent.meme.src;
+            memeVideo.poster = siteContent.meme.poster;
+            memeVideo.setAttribute('data-alt', siteContent.meme.alt);
         }
 
         // Poll (first poll drives the markup on the page)
@@ -665,6 +661,34 @@
             videoPlayer.currentTime = 0;
             videoPlayer.load(); // re-displays the poster frame
             videoPlayButton.style.display = 'flex';
+        });
+    }
+
+    /* ---------------------------------------------------------------------
+       MEME VIDEO: same play/pause/ended behavior as the Video Player Widget
+       --------------------------------------------------------------------- */
+    const memeVideoPlayer = document.getElementById('meme-video');
+    const memePlayButton = document.getElementById('meme-play-button');
+    const memeContainerEl = document.getElementById('meme-container');
+    if (memeVideoPlayer && memePlayButton) {
+        memeVideoPlayer.addEventListener('loadedmetadata', () => {
+            const w = memeVideoPlayer.videoWidth;
+            const h = memeVideoPlayer.videoHeight;
+            if (memeContainerEl && w && h) {
+                memeContainerEl.style.aspectRatio = `${w} / ${h}`;
+            }
+        });
+
+        memePlayButton.addEventListener('click', () => {
+            memeVideoPlayer.play();
+            memePlayButton.style.display = 'none';
+        });
+        memeVideoPlayer.addEventListener('pause', () => { memePlayButton.style.display = 'flex'; });
+        memeVideoPlayer.addEventListener('play', () => { memePlayButton.style.display = 'none'; });
+        memeVideoPlayer.addEventListener('ended', () => {
+            memeVideoPlayer.currentTime = 0;
+            memeVideoPlayer.load();
+            memePlayButton.style.display = 'flex';
         });
     }
 
