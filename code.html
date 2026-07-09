@@ -317,8 +317,9 @@
             </div>
 <div class="mt-8 border-stroke-width border-on-surface bg-white p-4">
 <div class="relative bg-white border-stroke-width border-on-surface flex items-center justify-center overflow-hidden mb-4" id="meme-container" style="aspect-ratio: 1 / 1;">
-<video class="absolute inset-0 w-full h-full object-contain" id="meme-video" controls playsinline preload="auto"></video>
-<button class="z-10 bg-secondary text-white w-20 h-20 rounded-full border-4 border-white shadow-[0_0_20px_rgba(255,255,255,0.5)] flex items-center justify-center hover:scale-110 transition-transform active:scale-95" id="meme-play-button" aria-label="Play meme video">
+<img class="absolute inset-0 w-full h-full object-contain hidden" id="meme-image"/>
+<video class="absolute inset-0 w-full h-full object-contain hidden" id="meme-video" controls playsinline preload="auto"></video>
+<button class="z-10 bg-secondary text-white w-20 h-20 rounded-full border-4 border-white shadow-[0_0_20px_rgba(255,255,255,0.5)] flex items-center justify-center hover:scale-110 transition-transform active:scale-95 hidden" id="meme-play-button" aria-label="Play meme video">
 <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
 </button>
 </div>
@@ -433,12 +434,24 @@
             alt: "Platonic Man video: 12 Ventriloquist Dummy.",
             caption: "VIDEO: \"12 VENTRILOQUIST DUMMY\""
         },
-        meme: {
-            type: "video",
-            src: "assets/video/memes/meme-2.mp4",
-            alt: "Meme del día en video: Platonic Man.",
-            title: "Platonic Man Meme of the Day"
-        },
+        // Collection of memes; the one flagged `active` (or the first one)
+        // drives the "Meme of the Day" widget. Each entry can be an image
+        // or a video — see getActiveMeme() below.
+        memes: [
+            {
+                type: "video",
+                src: "assets/img/teacher-mind.mp4",
+                alt: "Meme del día en video: Teacher Mind.",
+                label: "CLÁSICO",
+                active: true
+            },
+            {
+                type: "video",
+                src: "assets/video/memes/meme-2.mp4",
+                alt: "Meme del día en video: Platonic Man.",
+                label: "Platonic Man Meme of the Day"
+            }
+        ],
         polls: [
             {
                 label: "POLL OF THE DAY",
@@ -455,6 +468,10 @@
             facebook: "#"
         }
     };
+
+    function getActiveMeme() {
+        return siteContent.memes.find(m => m.active) || siteContent.memes[0];
+    }
 
     /* Inject the siteContent values into the DOM once the page has loaded. */
     function applySiteContent() {
@@ -508,11 +525,37 @@
         const videoCaption = document.getElementById('video-caption');
         if (videoCaption) videoCaption.textContent = siteContent.video.caption;
 
-        // Meme video (aspect-ratio sizing + play/pause handled below).
+        // Active meme — render as <img> or <video> depending on its type
+        // (aspect-ratio sizing + video play/pause handled below).
+        const activeMeme = getActiveMeme();
+        const memeImage = document.getElementById('meme-image');
         const memeVideo = document.getElementById('meme-video');
-        if (memeVideo) {
-            memeVideo.src = siteContent.meme.src;
-            memeVideo.setAttribute('data-alt', siteContent.meme.alt);
+        const memePlayButtonEl = document.getElementById('meme-play-button');
+        if (activeMeme.type === 'video') {
+            if (memeVideo) {
+                memeVideo.src = activeMeme.src;
+                memeVideo.setAttribute('data-alt', activeMeme.alt);
+                memeVideo.classList.remove('hidden');
+            }
+            if (memePlayButtonEl) memePlayButtonEl.classList.remove('hidden');
+            if (memeImage) memeImage.classList.add('hidden');
+        } else {
+            const memeContainer = document.getElementById('meme-container');
+            if (memeImage) {
+                memeImage.addEventListener('load', () => {
+                    const w = memeImage.naturalWidth;
+                    const h = memeImage.naturalHeight;
+                    if (memeContainer && w && h) {
+                        memeContainer.style.aspectRatio = `${w} / ${h}`;
+                    }
+                });
+                memeImage.src = activeMeme.src;
+                memeImage.alt = activeMeme.alt;
+                memeImage.setAttribute('data-alt', activeMeme.alt);
+                memeImage.classList.remove('hidden');
+            }
+            if (memeVideo) memeVideo.classList.add('hidden');
+            if (memePlayButtonEl) memePlayButtonEl.classList.add('hidden');
         }
 
         // Poll (first poll drives the markup on the page)
@@ -735,10 +778,11 @@
     const memeShareButton = document.getElementById('meme-share-button');
     if (memeShareButton) {
         memeShareButton.addEventListener('click', () => {
+            const activeMeme = getActiveMeme();
             shareContent({
-                title: siteContent.meme.title,
-                text: siteContent.meme.title,
-                url: siteContent.meme.src
+                title: activeMeme.label,
+                text: activeMeme.label,
+                url: activeMeme.src
             });
         });
     }
