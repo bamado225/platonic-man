@@ -235,7 +235,7 @@
 <div class="md:col-span-5 relative group">
 <div class="absolute -inset-2 bg-primary border-stroke-width border-on-surface -rotate-2 group-hover:rotate-0 transition-transform"></div>
 <div class="relative bg-surface border-stroke-width border-on-surface shadow-[12px_12px_0px_0px_rgba(27,27,27,1)] overflow-hidden">
-<img class="w-full h-auto" id="hero-image"/>
+<img class="w-full h-auto cursor-pointer hover:scale-[1.02] transition-transform" id="hero-image"/>
 </div>
 </div>
 <div class="md:col-span-7 flex flex-col justify-center items-start">
@@ -253,23 +253,11 @@
 <div class="absolute top-0 left-0 bg-tertiary text-on-tertiary px-4 py-1 border-r-stroke-width border-b-stroke-width border-on-surface font-label-bold z-10">
                 RECENT COMICS
             </div>
-<div class="grid grid-cols-2 lg:grid-cols-3 gap-4 pt-8">
-<a class="group cursor-pointer hover:scale-[1.02] transition-transform" data-comic-link="0" href="#" target="_blank" rel="noopener noreferrer">
+<div class="flex justify-center pt-8">
+<a class="group cursor-pointer hover:scale-[1.02] transition-transform w-full max-w-xs" data-comic-link="0" href="https://a.co/d/076xI29V" target="_blank" rel="noopener noreferrer">
 <div class="border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none transition-all">
 <img class="w-full aspect-[2/3] object-cover" data-comic="0"/>
 <div class="bg-on-surface text-surface p-2 font-label-bold text-center uppercase" data-comic-caption="0"></div>
-</div>
-</a>
-<a class="group cursor-pointer hover:scale-[1.02] transition-transform" data-comic-link="1" href="#" target="_blank" rel="noopener noreferrer">
-<div class="border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none transition-all">
-<img class="w-full aspect-[2/3] object-cover" data-comic="1"/>
-<div class="bg-on-surface text-surface p-2 font-label-bold text-center uppercase" data-comic-caption="1"></div>
-</div>
-</a>
-<a class="group cursor-pointer hover:scale-[1.02] transition-transform hidden lg:block" data-comic-link="2" href="#" target="_blank" rel="noopener noreferrer">
-<div class="border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] group-hover:translate-x-1 group-hover:translate-y-1 group-hover:shadow-none transition-all">
-<img class="w-full aspect-[2/3] object-cover" data-comic="2"/>
-<div class="bg-on-surface text-surface p-2 font-label-bold text-center uppercase" data-comic-caption="2"></div>
 </div>
 </a>
 </div>
@@ -402,7 +390,9 @@
         },
         heroImage: {
             src: "assets/img/platonic-man-hero.jpg",
-            alt: "An illustration of Platonic Man: a bald, smiling superhero wearing glasses, a red cape and a blue suit with a yellow heart bearing the letter 'P'. He holds a bouquet of red roses and daisies while standing on a comic-style city street, with a 'PLATONIC MAN' sign and Big Ben in the background."
+            alt: "An illustration of Platonic Man: a bald, smiling superhero wearing glasses, a red cape and a blue suit with a yellow heart bearing the letter 'P'. He holds a bouquet of red roses and daisies while standing on a comic-style city street, with a 'PLATONIC MAN' sign and Big Ben in the background.",
+            altSrc: "images/platonic1.jpeg",
+            altAlt: "An alternate illustration of Platonic Man."
         },
         bio: {
             quote: "\"Hi! I'm Platonic Man. I have zero luck in love, but I've got plenty of energy to save the day!\"",
@@ -410,21 +400,9 @@
         },
         comics: [
             {
-                src: "https://lh3.googleusercontent.com/aida-public/AB6AXuBrznstVDJTCs3qZKiFQKbaMpQ65ZwzzGvaroyBJGt_BcFgl9zqOgG2pk2HdJLQA0BLRzTHQ56uyxg0zPsRJkREQKLKk31sGppVYgQjHggE8H6z2lZmGMK91VMUF08_Bsu5uKitKvJCB14VdA_PlyYm7O_nzYJkRvwsdLHdgnBNha-I2IwEoh_yu09V28NPcnAB430aljL30Ky65UdokNiDBBrSvh93AkkfFIsSt7u21DDLVK_TKTMaTw",
-                alt: "A comic book cover titled 'PLATONIC MAN #12: The Dinner Date Disaster'. It features the hero looking devastated at a fancy restaurant while a villainous waiter laughs. High contrast, primary colors, halftone dots on the background.",
-                caption: "Seen 1 min ago",
-                link: "https://a.co/d/076xI29V"
-            },
-            {
-                src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDSEfxfLclblpYOvPh7759zj40qpdsCvV-7POr4ZsmTWlnZkc8K8SnjxngXu4I3AwQ3kC1DG2hxhfibV3khcHH0ZyBjaTqurPYtpWr_eknpqa1RuViK3EZXRs_ZiZEH6rcOkD5g_nRkQ-qkAn5IEFJn1eS4PEv3bQzvwwTLMkX4WISei8y9mLYsjjqc2CIqsgpXHTsHSbU9z3XmP0DkjXpBG3FdrKvPLUO9avhNSANI4YZfWn2TET4bUg",
-                alt: "A comic book cover titled 'PLATONIC MAN #13: Just Friends Forever'. The hero is carrying heavy boxes for a character he likes. Bold comic font, yellow and red color scheme with thick black outlines.",
-                caption: "NEW!",
-                link: "https://a.co/d/076xI29V"
-            },
-            {
-                src: "https://lh3.googleusercontent.com/aida-public/AB6AXuDZX5DhQfLE-hW_XQFf8t8kHmiDlSde7I5fmxFoYWYiuq5w-AF079tiRZGMAw19WeVjuyBUs8IG_Piz_yElGBwsg1JSCIar4HEd_zC9ahSHrEM2ZGXODQsvY1fTdUeAXmtB35lOLaQSKUn-9895o9yfTt6RMWPqg-1jsPJiIm69DlUZVHbOIFrSU58bnZTzT2azxXLDtiAYkyGa97QL8kB93FdDmWFNY3gdwL9y93XmZ_Q7dTDGrab17w",
-                alt: "Comic book cover showing Platonic Man heroically saving a cat from a tree, but nobody is watching. Red and blue suit, dramatic shading, vintage paper texture look.",
-                caption: "CLASSIC",
+                src: "images/platonicbook.png",
+                alt: "Cover of the Platonic Man comic book collection.",
+                caption: "¡CONSÍGUELO YA!",
                 link: "https://a.co/d/076xI29V"
             }
         ],
@@ -661,6 +639,19 @@
 
             requestAnimationFrame(animate);
         }
+    }
+
+    /* ---------------------------------------------------------------------
+       HERO IMAGE: click to toggle between the two portraits.
+       --------------------------------------------------------------------- */
+    const heroImageEl = document.getElementById('hero-image');
+    let showingAltHero = false;
+    if (heroImageEl) {
+        heroImageEl.addEventListener('click', () => {
+            showingAltHero = !showingAltHero;
+            heroImageEl.src = showingAltHero ? siteContent.heroImage.altSrc : siteContent.heroImage.src;
+            heroImageEl.alt = showingAltHero ? siteContent.heroImage.altAlt : siteContent.heroImage.alt;
+        });
     }
 
     /* ---------------------------------------------------------------------
