@@ -4,6 +4,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Platonic Man - The Friendzone Hero</title>
+<link id="favicon-link" rel="icon" type="image/jpeg" href=""/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@800;900&amp;family=Work+Sans:wght@400&amp;family=Space+Grotesk:wght@700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -495,6 +496,9 @@
             src: "assets/img/logo.jpg",
             alt: "Platonic Man logo"
         },
+        favicon: {
+            src: "assets/img/favicon-heart.jpg"
+        },
         footer: {
             brand: "PLATONIC COMICS",
             copyright: "© 1962 PLATONIC COMICS"
@@ -572,6 +576,10 @@
             logoImg.src = siteContent.logo.src;
             logoImg.alt = siteContent.logo.alt;
         });
+
+        // Favicon
+        const faviconLink = document.getElementById('favicon-link');
+        if (faviconLink) faviconLink.href = siteContent.favicon.src;
 
         // Footer text
         const footerBrand = document.getElementById('footer-brand');
