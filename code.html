@@ -504,8 +504,8 @@
             copyright: "© 1962 PLATONIC COMICS"
         },
         heroImage: {
-            src: "assets/img/platonic-man-hero.jpg",
-            alt: "An illustration of Platonic Man: a bald, smiling superhero wearing glasses, a red cape and a blue suit with a yellow heart bearing the letter 'P'. He holds a bouquet of red roses and daisies while standing on a comic-style city street, with a 'PLATONIC MAN' sign and Big Ben in the background.",
+            src: "assets/img/new-platonicman.png",
+            alt: "An updated illustration of Platonic Man.",
             altSrc: "images/platonic1.jpeg",
             altAlt: "An alternate illustration of Platonic Man."
         },
@@ -577,11 +577,18 @@
 
     /* Inject the siteContent values into the DOM once the page has loaded. */
     function applySiteContent() {
-        // Logo (header + footer share the same image)
-        document.querySelectorAll('#header-logo, #footer-logo').forEach(logoImg => {
-            logoImg.src = siteContent.logo.src;
-            logoImg.alt = siteContent.logo.alt;
-        });
+        // Footer logo
+        const footerLogoImg = document.getElementById('footer-logo');
+        if (footerLogoImg) {
+            footerLogoImg.src = siteContent.logo.src;
+            footerLogoImg.alt = siteContent.logo.alt;
+        }
+        // Header logo reuses the same image as the favicon.
+        const headerLogoImg = document.getElementById('header-logo');
+        if (headerLogoImg) {
+            headerLogoImg.src = siteContent.favicon.src;
+            headerLogoImg.alt = siteContent.logo.alt;
+        }
 
         // Favicon
         const faviconLink = document.getElementById('favicon-link');
