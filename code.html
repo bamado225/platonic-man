@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Platonic Man - The Friendzone Hero</title>
-<link id="favicon-link" rel="icon" type="image/jpeg" href=""/>
+<link id="favicon-link" rel="icon" type="image/png" href=""/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@800;900&amp;family=Work+Sans:wght@400&amp;family=Space+Grotesk:wght@700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
@@ -497,7 +497,7 @@
             alt: "Platonic Man logo"
         },
         favicon: {
-            src: "assets/img/favicon-heart.jpg"
+            src: "assets/img/newlogo.png"
         },
         footer: {
             brand: "PLATONIC COMICS",
@@ -531,11 +531,17 @@
         // or a video — see getActiveMeme() below.
         memes: [
             {
+                type: "image",
+                src: "assets/img/meme-of-today.jpeg",
+                alt: "Meme of the day: Platonic Man.",
+                label: "MEME OF THE DAY",
+                active: true
+            },
+            {
                 type: "video",
                 src: "assets/img/teacher-mind.mp4",
                 alt: "Meme of the day video: Teacher Mind.",
-                label: "CLASSIC",
-                active: true
+                label: "CLASSIC"
             },
             {
                 type: "video",
@@ -546,7 +552,7 @@
         ],
         polls: [
             {
-                label: "POLL OF THE DAY",
+                label: "POLL OF THE WEEK",
                 question: "Which one should I choose?",
                 options: [
                     { text: "Mary Ann", icon: "local_florist" },
