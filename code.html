@@ -113,7 +113,7 @@
         }
         .marquee-content {
             display: inline-block;
-            animation: marquee 20s linear infinite;
+            animation: marquee 38s linear infinite;
         }
         @keyframes marquee {
             0% { transform: translateX(100%); }
@@ -297,7 +297,7 @@
 <!-- News Ticker (Marquee) -->
 <div class="bg-secondary text-on-secondary py-2 border-b-stroke-width border-on-surface z-50 sticky top-0 marquee">
 <div class="marquee-content font-label-bold text-label-bold uppercase">
-        BREAKING NEWS: Platonic Man is still single! | NEW COMIC: Love in the Friendzone | POLL: What gift should I give today? | BREAKING NEWS: Platonic Man is still single! | NEW COMIC: Love in the Friendzone
+        BREAKING NEWS: Platonic Man is still single! | NEW COMIC: Love in the Friendzone | POLL: What gift should I give today? | NEW! Send a letter to Platonic Man | BREAKING NEWS: Platonic Man is still single! | NEW COMIC: Love in the Friendzone
 </div>
 </div>
 <!-- TopAppBar -->
@@ -322,7 +322,7 @@
 <div class="md:col-span-5 relative group">
 <div class="absolute -inset-2 bg-primary border-stroke-width border-on-surface -rotate-2 group-hover:rotate-0 transition-transform"></div>
 <div class="relative bg-surface border-stroke-width border-on-surface shadow-[12px_12px_0px_0px_rgba(27,27,27,1)] overflow-hidden">
-<img class="w-full h-auto cursor-pointer hover:scale-[1.02] transition-transform" id="hero-image"/>
+<img class="w-full h-auto" id="hero-image"/>
 </div>
 </div>
 <div class="md:col-span-7 flex flex-col justify-center items-start">
@@ -502,7 +502,7 @@
             src: "assets/img/newlogo.png"
         },
         letterStamp: {
-            src: "assets/img/new-platonicman.png",
+            src: "assets/img/platoniccart.png",
             alt: "A postage stamp featuring Platonic Man."
         },
         footer: {
@@ -511,9 +511,7 @@
         },
         heroImage: {
             src: "assets/img/platonic-man-hero.jpg",
-            alt: "An illustration of Platonic Man: a bald, smiling superhero wearing glasses, a red cape and a blue suit with a yellow heart bearing the letter 'P'. He holds a bouquet of red roses and daisies while standing on a comic-style city street, with a 'PLATONIC MAN' sign and Big Ben in the background.",
-            altSrc: "images/platonic1.jpeg",
-            altAlt: "An alternate illustration of Platonic Man."
+            alt: "An illustration of Platonic Man: a bald, smiling superhero wearing glasses, a red cape and a blue suit with a yellow heart bearing the letter 'P'. He holds a bouquet of red roses and daisies while standing on a comic-style city street, with a 'PLATONIC MAN' sign and Big Ben in the background."
         },
         bio: {
             quote: "\"Hi! I'm Platonic Man. I have zero luck in love, but I've got plenty of energy to save the day!\"",
@@ -788,19 +786,6 @@
 
             requestAnimationFrame(animate);
         }
-    }
-
-    /* ---------------------------------------------------------------------
-       HERO IMAGE: click to toggle between the two portraits.
-       --------------------------------------------------------------------- */
-    const heroImageEl = document.getElementById('hero-image');
-    let showingAltHero = false;
-    if (heroImageEl) {
-        heroImageEl.addEventListener('click', () => {
-            showingAltHero = !showingAltHero;
-            heroImageEl.src = showingAltHero ? siteContent.heroImage.altSrc : siteContent.heroImage.src;
-            heroImageEl.alt = showingAltHero ? siteContent.heroImage.altAlt : siteContent.heroImage.alt;
-        });
     }
 
     /* ---------------------------------------------------------------------
