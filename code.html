@@ -218,6 +218,7 @@
             perspective: 1000px;
         }
         .letter-card {
+            position: relative;
             background: #f3e9d2;
             border: 2px solid #cbb27e;
             border-radius: 6px;
@@ -414,6 +415,7 @@
 <h2 class="font-headline-md text-headline-md uppercase text-center mb-10 text-on-secondary-container">Send a message to Platonic Man!</h2>
 <div class="max-w-xl mx-auto letter-wrap">
 <div class="letter-card p-8 sm:p-10" id="letter-card">
+<img alt="A postage stamp featuring Platonic Man." class="absolute top-3 right-3 w-16 h-16 sm:w-20 sm:h-20 object-cover border-2 border-on-surface shadow-[2px_2px_0px_0px_rgba(27,27,27,1)] rotate-3 pointer-events-none" id="letter-stamp"/>
 <form id="letter-form">
 <textarea class="w-full bg-transparent border-none resize-none focus:outline-none font-body-lg italic text-on-surface min-h-[200px]" id="letter-textarea" placeholder="Dear noble and reverend Platonic Man..." required></textarea>
 <div class="flex justify-end mt-4">
@@ -499,13 +501,17 @@
         favicon: {
             src: "assets/img/newlogo.png"
         },
+        letterStamp: {
+            src: "assets/img/new-platonicman.png",
+            alt: "A postage stamp featuring Platonic Man."
+        },
         footer: {
             brand: "PLATONIC COMICS",
             copyright: "© 1962 PLATONIC COMICS"
         },
         heroImage: {
-            src: "assets/img/new-platonicman.png",
-            alt: "An updated illustration of Platonic Man.",
+            src: "assets/img/platonic-man-hero.jpg",
+            alt: "An illustration of Platonic Man: a bald, smiling superhero wearing glasses, a red cape and a blue suit with a yellow heart bearing the letter 'P'. He holds a bouquet of red roses and daisies while standing on a comic-style city street, with a 'PLATONIC MAN' sign and Big Ben in the background.",
             altSrc: "images/platonic1.jpeg",
             altAlt: "An alternate illustration of Platonic Man."
         },
@@ -593,6 +599,13 @@
         // Favicon
         const faviconLink = document.getElementById('favicon-link');
         if (faviconLink) faviconLink.href = siteContent.favicon.src;
+
+        // Letter stamp (Send a Message section)
+        const letterStampImg = document.getElementById('letter-stamp');
+        if (letterStampImg) {
+            letterStampImg.src = siteContent.letterStamp.src;
+            letterStampImg.alt = siteContent.letterStamp.alt;
+        }
 
         // Footer text
         const footerBrand = document.getElementById('footer-brand');
