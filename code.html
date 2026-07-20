@@ -616,7 +616,7 @@
         game: {
             titulo: "FRIENDZONE RUN",
             subtitulo: "¡Esquiva a tus amigas antes de que te digan 'te quiero como amigo'!",
-            heroImg: null,
+            heroImg: "assets/img/runner-hero.png",
             obstacleImg: null,
             gameOverFrases: [
                 "¡TE FRIENDZONEARON!",
@@ -1186,7 +1186,15 @@
 
         function drawSprite(img, ready, emoji, x, y, size) {
             if (ready) {
-                ctx.drawImage(img, x, y, size, size);
+                // Real sprites keep their natural aspect ratio instead of
+                // being squashed into the (square) hitbox — drawn at a
+                // fixed height, bottom-anchored and centered over the box.
+                const drawHeight = 60;
+                const ratio = (img.naturalWidth && img.naturalHeight) ? img.naturalWidth / img.naturalHeight : 1;
+                const drawWidth = drawHeight * ratio;
+                const drawX = x + size / 2 - drawWidth / 2;
+                const drawY = y + size - drawHeight;
+                ctx.drawImage(img, drawX, drawY, drawWidth, drawHeight);
             } else {
                 ctx.font = `${size}px sans-serif`;
                 ctx.textAlign = 'center';
