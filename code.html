@@ -373,6 +373,7 @@
 <div class="md:col-span-6 self-start bg-primary-container border-stroke-width border-on-surface p-2 shadow-[8px_8px_0px_0px_rgba(27,27,27,1)]">
 <div class="relative bg-black border-stroke-width border-on-surface flex items-center justify-center overflow-hidden" id="video-container" style="aspect-ratio: 16 / 9;">
 <video class="absolute inset-0 w-full h-full object-contain" id="video-player" controls playsinline preload="auto"></video>
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="absolute inset-0 w-full h-full hidden" frameborder="0" id="video-iframe" loading="lazy"></iframe>
 <button class="z-10 bg-secondary text-white w-20 h-20 rounded-full border-4 border-white shadow-[0_0_20px_rgba(255,255,255,0.5)] flex items-center justify-center hover:scale-110 transition-transform active:scale-95" id="video-play-button" aria-label="Play video">
 <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
 </button>
@@ -397,6 +398,7 @@
 <div class="relative bg-white border-stroke-width border-on-surface flex items-center justify-center overflow-hidden mb-4" id="meme-container" style="aspect-ratio: 1 / 1;">
 <img class="absolute inset-0 w-full h-full object-contain hidden" id="meme-image"/>
 <video class="absolute inset-0 w-full h-full object-contain hidden" id="meme-video" controls playsinline preload="auto"></video>
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="absolute inset-0 w-full h-full hidden" frameborder="0" id="meme-iframe" loading="lazy"></iframe>
 <button class="z-10 bg-secondary text-white w-20 h-20 rounded-full border-4 border-white shadow-[0_0_20px_rgba(255,255,255,0.5)] flex items-center justify-center hover:scale-110 transition-transform active:scale-95 hidden" id="meme-play-button" aria-label="Play meme video">
 <span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
 </button>
@@ -560,7 +562,8 @@
             }
         ],
         video: {
-            src: "assets/video/14-rope.mp4",
+            type: "youtube",
+            src: "UOpFcBBhKtw",
             alt: "Platonic Man video: 14 Rope.",
             caption: "VIDEO: \"14 ROPE\""
         },
@@ -569,8 +572,8 @@
         // or a video — see getActiveMeme() below.
         memes: [
             {
-                type: "video",
-                src: "assets/video/15-coach-mind.mp4",
+                type: "youtube",
+                src: "lt8oZGf87F4",
                 alt: "Meme of the day video: Coach Mind.",
                 label: "MEME OF THE DAY",
                 active: true
@@ -582,14 +585,14 @@
                 label: "MEME OF THE DAY"
             },
             {
-                type: "video",
-                src: "assets/img/teacher-mind.mp4",
+                type: "youtube",
+                src: "rjDlMOhEQP4",
                 alt: "Meme of the day video: Teacher Mind.",
                 label: "CLASSIC"
             },
             {
-                type: "video",
-                src: "assets/video/memes/meme-2.mp4",
+                type: "youtube",
+                src: "DvxBj-7yqO8",
                 alt: "Meme of the day video: Platonic Man.",
                 label: "Platonic Man Meme of the Day"
             }
@@ -703,22 +706,68 @@
         const buyBookButton = document.getElementById('buy-book-button');
         if (buyBookButton && siteContent.comics[0]) buyBookButton.href = siteContent.comics[0].link;
 
-        // Video
+        // Video — local <video> file or a YouTube (Shorts) <iframe> embed,
+        // picked via siteContent.video.type. The embed gets a narrower,
+        // vertical container so 9:16 Shorts don't end up cropped or
+        // letterboxed inside the wide 16:9 box the local player uses.
         const videoPlayer = document.getElementById('video-player');
-        if (videoPlayer) {
-            videoPlayer.src = siteContent.video.src;
-            videoPlayer.setAttribute('data-alt', siteContent.video.alt);
+        const videoIframe = document.getElementById('video-iframe');
+        const videoContainerEl = document.getElementById('video-container');
+        const videoPlayButtonEl = document.getElementById('video-play-button');
+        if (siteContent.video.type === 'youtube') {
+            if (videoIframe) {
+                videoIframe.src = `https://www.youtube.com/embed/${siteContent.video.src}`;
+                videoIframe.classList.remove('hidden');
+            }
+            if (videoPlayer) videoPlayer.classList.add('hidden');
+            if (videoPlayButtonEl) videoPlayButtonEl.classList.add('hidden');
+            if (videoContainerEl) {
+                videoContainerEl.style.aspectRatio = '9 / 16';
+                videoContainerEl.classList.add('max-w-[320px]', 'mx-auto');
+            }
+        } else {
+            if (videoPlayer) {
+                videoPlayer.src = siteContent.video.src;
+                videoPlayer.setAttribute('data-alt', siteContent.video.alt);
+                videoPlayer.classList.remove('hidden');
+            }
+            if (videoIframe) videoIframe.classList.add('hidden');
+            if (videoPlayButtonEl) videoPlayButtonEl.classList.remove('hidden');
+            if (videoContainerEl) {
+                videoContainerEl.style.aspectRatio = '16 / 9';
+                videoContainerEl.classList.remove('max-w-[320px]', 'mx-auto');
+            }
         }
         const videoCaption = document.getElementById('video-caption');
         if (videoCaption) videoCaption.textContent = siteContent.video.caption;
 
-        // Active meme — render as <img> or <video> depending on its type
-        // (aspect-ratio sizing + video play/pause handled below).
+        // Active meme — render as <img>, <video> or a YouTube <iframe>
+        // depending on its type (aspect-ratio sizing + local-video
+        // play/pause handled below).
         const activeMeme = getActiveMeme();
         const memeImage = document.getElementById('meme-image');
         const memeVideo = document.getElementById('meme-video');
+        const memeIframe = document.getElementById('meme-iframe');
         const memePlayButtonEl = document.getElementById('meme-play-button');
-        if (activeMeme.type === 'video') {
+        const memeContainer = document.getElementById('meme-container');
+        if (activeMeme.type === 'youtube') {
+            if (memeIframe) {
+                memeIframe.src = `https://www.youtube.com/embed/${activeMeme.src}`;
+                memeIframe.classList.remove('hidden');
+            }
+            if (memeVideo) memeVideo.classList.add('hidden');
+            if (memeImage) memeImage.classList.add('hidden');
+            if (memePlayButtonEl) memePlayButtonEl.classList.add('hidden');
+            if (memeContainer) {
+                memeContainer.style.aspectRatio = '9 / 16';
+                memeContainer.classList.add('max-w-[320px]', 'mx-auto');
+            }
+        } else if (activeMeme.type === 'video') {
+            if (memeIframe) memeIframe.classList.add('hidden');
+            if (memeContainer) {
+                memeContainer.style.aspectRatio = '1 / 1';
+                memeContainer.classList.remove('max-w-[320px]', 'mx-auto');
+            }
             if (memeVideo) {
                 memeVideo.src = activeMeme.src;
                 memeVideo.setAttribute('data-alt', activeMeme.alt);
@@ -727,7 +776,11 @@
             if (memePlayButtonEl) memePlayButtonEl.classList.remove('hidden');
             if (memeImage) memeImage.classList.add('hidden');
         } else {
-            const memeContainer = document.getElementById('meme-container');
+            if (memeIframe) memeIframe.classList.add('hidden');
+            if (memeContainer) {
+                memeContainer.style.aspectRatio = '1 / 1';
+                memeContainer.classList.remove('max-w-[320px]', 'mx-auto');
+            }
             if (memeImage) {
                 memeImage.addEventListener('load', () => {
                     const w = memeImage.naturalWidth;
@@ -1023,10 +1076,13 @@
     if (memeShareButton) {
         memeShareButton.addEventListener('click', () => {
             const activeMeme = getActiveMeme();
+            const shareUrl = activeMeme.type === 'youtube'
+                ? `https://www.youtube.com/watch?v=${activeMeme.src}`
+                : new URL(activeMeme.src, window.location.href).href;
             shareContent({
                 title: activeMeme.label,
                 text: activeMeme.label,
-                url: activeMeme.src
+                url: shareUrl
             });
         });
     }
@@ -1034,8 +1090,9 @@
     const videoShareButton = document.getElementById('video-share-button');
     if (videoShareButton) {
         videoShareButton.addEventListener('click', () => {
-            // Prefer a direct URL to the video file; fall back to this page.
-            const videoUrl = new URL(siteContent.video.src, window.location.href).href;
+            const videoUrl = siteContent.video.type === 'youtube'
+                ? `https://www.youtube.com/watch?v=${siteContent.video.src}`
+                : new URL(siteContent.video.src, window.location.href).href;
             shareContent({
                 title: siteContent.video.caption,
                 text: siteContent.video.caption,
