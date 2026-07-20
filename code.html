@@ -307,7 +307,7 @@
 <h1 class="font-headline-md text-headline-md italic uppercase text-primary">PLATONIC MAN</h1>
 </div>
 <nav class="hidden md:flex items-center gap-6">
-<a class="font-label-bold text-label-bold uppercase text-on-surface hover:text-primary transition-colors" href="#juego">Juegos</a>
+<a class="font-label-bold text-label-bold uppercase text-on-surface hover:text-primary transition-colors" href="#juego">Games</a>
 </nav>
 <div class="flex items-center gap-3">
 <a class="bg-primary text-white px-4 sm:px-8 py-3 font-headline-sm text-headline-sm border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95 flex items-center gap-2" id="buy-book-button" href="#" target="_blank" rel="noopener noreferrer">
@@ -434,11 +434,11 @@
 </div>
 <div class="max-w-2xl mx-auto mt-4 flex flex-wrap items-center justify-between gap-4">
 <div class="flex gap-6 font-label-bold text-label-bold uppercase">
-<span id="game-score">PUNTOS: 0</span>
-<span id="game-highscore">RÉCORD: 0</span>
+<span id="game-score">SCORE: 0</span>
+<span id="game-highscore">BEST: 0</span>
 </div>
 <button class="bg-primary text-white px-8 py-3 font-headline-sm text-headline-sm border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95" id="game-play-button">
-                    JUGAR
+                    PLAY
                 </button>
 </div>
 </div>
@@ -614,15 +614,23 @@
             facebook: "#"
         },
         game: {
-            titulo: "FRIENDZONE RUN",
-            subtitulo: "¡Esquiva a tus amigas antes de que te digan 'te quiero como amigo'!",
+            title: "FRIENDZONE RUN",
+            subtitle: "Dodge your friends before they tell you 'I love you like a friend'!",
             heroImg: "assets/img/runner-hero.png",
-            obstacleImg: null,
-            gameOverFrases: [
-                "¡TE FRIENDZONEARON!",
-                "«Eres como un hermano para mí»",
-                "«Te quiero... como amigo»",
-                "«No quiero arruinar nuestra amistad»"
+            obstacleImgs: [
+                "assets/img/runner-girl-1.png",
+                "assets/img/runner-girl-2.png",
+                "assets/img/runner-girl-3.png",
+                "assets/img/runner-girl-4.png",
+                "assets/img/runner-girl-5.png",
+                "assets/img/runner-girl-6.png",
+                "assets/img/runner-girl-7.png"
+            ],
+            gameOverPhrases: [
+                "YOU GOT FRIENDZONED!",
+                "\"You're like a brother to me\"",
+                "\"I love you... like a friend\"",
+                "\"I don't want to ruin our friendship\""
             ]
         }
     };
@@ -767,9 +775,9 @@
 
         // Game title/subtitle
         const gameTitle = document.getElementById('game-title');
-        if (gameTitle) gameTitle.textContent = siteContent.game.titulo;
+        if (gameTitle) gameTitle.textContent = siteContent.game.title;
         const gameSubtitle = document.getElementById('game-subtitle');
-        if (gameSubtitle) gameSubtitle.textContent = siteContent.game.subtitulo;
+        if (gameSubtitle) gameSubtitle.textContent = siteContent.game.subtitle;
     }
 
     applySiteContent();
@@ -1095,31 +1103,36 @@
         const ctx = canvas.getContext('2d');
 
         const GROUND_MARGIN = 30;
-        const GRAVITY = 1500;        // px/s^2
-        const JUMP_VELOCITY = -560;  // px/s
-        const BASE_SPEED = 260;      // px/s
-        const SPEED_RAMP = 6;        // px/s gained per second survived
+        const GRAVITY = 1300;        // px/s^2
+        const JUMP_VELOCITY = -650;  // px/s
+        const BASE_SPEED = 180;      // px/s (slower start — easier)
+        const SPEED_RAMP = 3;        // px/s gained per second survived (gentler ramp)
         const PLAYER_SIZE = 44;
         const OBSTACLE_SIZE = 40;
         const PLAYER_X = 50;
 
-        // Sprites: try to load the configured images; fall back to emoji if
-        // the config is null (as it is right now — no runner-*.png yet) or
-        // if the file fails to load for any reason.
+        // Hero sprite: try to load the configured image; fall back to emoji
+        // if the config is null or if the file fails to load.
         let heroImgReady = false;
-        let obstacleImgReady = false;
         const heroImg = new Image();
-        const obstacleImg = new Image();
         if (siteContent.game.heroImg) {
             heroImg.onload = () => { heroImgReady = true; };
             heroImg.onerror = () => { heroImgReady = false; };
             heroImg.src = siteContent.game.heroImg;
         }
-        if (siteContent.game.obstacleImg) {
-            obstacleImg.onload = () => { obstacleImgReady = true; };
-            obstacleImg.onerror = () => { obstacleImgReady = false; };
-            obstacleImg.src = siteContent.game.obstacleImg;
-        }
+
+        // Obstacle sprite pool: one entry per configured image. Each entry
+        // tracks its own load state, so if one image fails to load only
+        // obstacles that randomly picked it fall back to the emoji — the
+        // other loaded images keep working normally.
+        const obstacleSprites = (siteContent.game.obstacleImgs || []).map(src => {
+            const sprite = { img: new Image(), ready: false };
+            sprite.img.onload = () => { sprite.ready = true; };
+            sprite.img.onerror = () => { sprite.ready = false; };
+            sprite.img.src = src;
+            return sprite;
+        });
+
         const HERO_EMOJI = '🏃';
         const OBSTACLE_EMOJI = '💁‍♀️';
 
@@ -1160,8 +1173,8 @@
         }
 
         function updateScoreDisplay() {
-            if (scoreEl) scoreEl.textContent = `PUNTOS: ${score}`;
-            if (highScoreEl) highScoreEl.textContent = `RÉCORD: ${highScore}`;
+            if (scoreEl) scoreEl.textContent = `SCORE: ${score}`;
+            if (highScoreEl) highScoreEl.textContent = `BEST: ${highScore}`;
         }
 
         function jump() {
@@ -1173,10 +1186,14 @@
         }
 
         function spawnObstacle() {
+            const sprite = obstacleSprites.length
+                ? obstacleSprites[Math.floor(Math.random() * obstacleSprites.length)]
+                : null;
             obstacles.push({
                 x: canvas.width,
                 y: groundY() - OBSTACLE_SIZE,
-                scored: false
+                scored: false,
+                sprite
             });
         }
 
@@ -1189,7 +1206,7 @@
                 // Real sprites keep their natural aspect ratio instead of
                 // being squashed into the (square) hitbox — drawn at a
                 // fixed height, bottom-anchored and centered over the box.
-                const drawHeight = 60;
+                const drawHeight = 110;
                 const ratio = (img.naturalWidth && img.naturalHeight) ? img.naturalWidth / img.naturalHeight : 1;
                 const drawWidth = drawHeight * ratio;
                 const drawX = x + size / 2 - drawWidth / 2;
@@ -1216,7 +1233,9 @@
 
             drawSprite(heroImg, heroImgReady, HERO_EMOJI, PLAYER_X, player.y, PLAYER_SIZE);
             obstacles.forEach(o => {
-                drawSprite(obstacleImg, obstacleImgReady, OBSTACLE_EMOJI, o.x, o.y, OBSTACLE_SIZE);
+                const ready = !!(o.sprite && o.sprite.ready);
+                const img = o.sprite ? o.sprite.img : null;
+                drawSprite(img, ready, OBSTACLE_EMOJI, o.x, o.y, OBSTACLE_SIZE);
             });
         }
 
@@ -1225,11 +1244,11 @@
             if (rafId) cancelAnimationFrame(rafId);
             highScore = Math.max(highScore, score);
             updateScoreDisplay();
-            const phrases = siteContent.game.gameOverFrases;
+            const phrases = siteContent.game.gameOverPhrases;
             if (gameOverPhraseEl) {
                 gameOverPhraseEl.textContent = phrases[Math.floor(Math.random() * phrases.length)];
             }
-            if (gameOverScoreEl) gameOverScoreEl.textContent = `Puntos: ${score}`;
+            if (gameOverScoreEl) gameOverScoreEl.textContent = `Score: ${score}`;
             if (gameOverScreen) gameOverScreen.classList.remove('hidden');
         }
 
@@ -1250,16 +1269,24 @@
                 player.grounded = true;
             }
 
-            // Spawn + move obstacles
-            spawnTimer -= dt;
-            if (spawnTimer <= 0) {
-                spawnObstacle();
-                const minInterval = 0.7;
-                const maxInterval = Math.max(minInterval, 1.6 - elapsed * 0.02);
-                spawnTimer = minInterval + Math.random() * (maxInterval - minInterval);
+            // Spawn + move obstacles — only one is ever on screen at a time.
+            // While one is active it just moves; a fresh random gap starts
+            // counting down only once it has fully left the canvas.
+            if (obstacles.length === 0) {
+                spawnTimer -= dt;
+                if (spawnTimer <= 0) {
+                    spawnObstacle();
+                }
+            } else {
+                obstacles.forEach(o => { o.x -= speed * dt; });
+                const stillVisible = obstacles.filter(o => o.x + OBSTACLE_SIZE > 0);
+                if (stillVisible.length === 0) {
+                    const minInterval = 0.9;
+                    const maxInterval = Math.max(minInterval, 1.8 - elapsed * 0.015);
+                    spawnTimer = minInterval + Math.random() * (maxInterval - minInterval);
+                }
+                obstacles = stillVisible;
             }
-            obstacles.forEach(o => { o.x -= speed * dt; });
-            obstacles = obstacles.filter(o => o.x + OBSTACLE_SIZE > 0);
 
             // Scoring + collision
             for (const o of obstacles) {
