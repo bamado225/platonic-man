@@ -306,6 +306,9 @@
 <img id="header-logo" class="h-16 w-16 border-2 border-on-surface"/>
 <h1 class="font-headline-md text-headline-md italic uppercase text-primary">PLATONIC MAN</h1>
 </div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-label-bold text-label-bold uppercase text-on-surface hover:text-primary transition-colors" href="#juego">Juegos</a>
+</nav>
 <div class="flex items-center gap-3">
 <a class="bg-primary text-white px-4 sm:px-8 py-3 font-headline-sm text-headline-sm border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95 flex items-center gap-2" id="buy-book-button" href="#" target="_blank" rel="noopener noreferrer">
 <span class="material-symbols-outlined">shopping_cart</span>
@@ -409,6 +412,37 @@
 </div>
 </div>
 </div>
+<!-- Friendzone Run mini-game -->
+<section class="pt-12" id="juego">
+<div class="bg-surface border-stroke-width border-on-surface p-panel-margin shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] relative">
+<div class="absolute top-[-15px] left-[20px] bg-secondary text-on-secondary px-6 py-2 border-stroke-width border-on-surface font-headline-sm text-headline-sm -rotate-2 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+                MINI-GAME
+            </div>
+<div class="mt-6 text-center max-w-2xl mx-auto">
+<h2 class="font-headline-md text-headline-md uppercase" id="game-title"></h2>
+<p class="font-body-lg text-on-surface-variant mt-2" id="game-subtitle"></p>
+</div>
+<div class="relative max-w-2xl mx-auto mt-6">
+<canvas class="w-full block bg-white border-stroke-width border-on-surface" height="300" id="runner-canvas" style="touch-action: none;"></canvas>
+<div class="hidden absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white/95 border-stroke-width border-on-surface p-6 text-center" id="game-over-screen">
+<p class="font-headline-sm text-headline-sm uppercase" id="game-over-phrase"></p>
+<p class="font-label-bold text-label-bold" id="game-over-score"></p>
+<button class="bg-secondary text-on-secondary px-8 py-3 font-headline-sm text-headline-sm border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95" id="game-retry-button">
+                        RETRY
+                    </button>
+</div>
+</div>
+<div class="max-w-2xl mx-auto mt-4 flex flex-wrap items-center justify-between gap-4">
+<div class="flex gap-6 font-label-bold text-label-bold uppercase">
+<span id="game-score">PUNTOS: 0</span>
+<span id="game-highscore">RÉCORD: 0</span>
+</div>
+<button class="bg-primary text-white px-8 py-3 font-headline-sm text-headline-sm border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95" id="game-play-button">
+                    JUGAR
+                </button>
+</div>
+</div>
+</section>
 <!-- Send a Message Section -->
 <section class="pt-12">
 <div class="bg-secondary-container border-stroke-width border-on-surface p-panel-margin shadow-[8px_8px_0px_0px_rgba(27,27,27,1)]">
@@ -578,6 +612,18 @@
             twitter: "#",
             tiktok: "#",
             facebook: "#"
+        },
+        game: {
+            titulo: "FRIENDZONE RUN",
+            subtitulo: "¡Esquiva a tus amigas antes de que te digan 'te quiero como amigo'!",
+            heroImg: null,
+            obstacleImg: null,
+            gameOverFrases: [
+                "¡TE FRIENDZONEARON!",
+                "«Eres como un hermano para mí»",
+                "«Te quiero... como amigo»",
+                "«No quiero arruinar nuestra amistad»"
+            ]
         }
     };
 
@@ -718,6 +764,12 @@
                 if (link) link.href = url;
             });
         }
+
+        // Game title/subtitle
+        const gameTitle = document.getElementById('game-title');
+        if (gameTitle) gameTitle.textContent = siteContent.game.titulo;
+        const gameSubtitle = document.getElementById('game-subtitle');
+        if (gameSubtitle) gameSubtitle.textContent = siteContent.game.subtitulo;
     }
 
     applySiteContent();
@@ -1030,5 +1082,222 @@
             // Potential for adding "comic burst" particles or subtle tilt
         });
     });
+
+    /* ---------------------------------------------------------------------
+       FRIENDZONE RUN: vanilla-canvas side-scrolling runner. Hero stays put
+       on the left, obstacles ("amigas") spawn on the right and close in.
+       Jump to dodge them; speed ramps up over time. No external libraries,
+       no persistence — the high score only lives for this page session.
+       --------------------------------------------------------------------- */
+    (function initFriendzoneRun() {
+        const canvas = document.getElementById('runner-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+
+        const GROUND_MARGIN = 30;
+        const GRAVITY = 1500;        // px/s^2
+        const JUMP_VELOCITY = -560;  // px/s
+        const BASE_SPEED = 260;      // px/s
+        const SPEED_RAMP = 6;        // px/s gained per second survived
+        const PLAYER_SIZE = 44;
+        const OBSTACLE_SIZE = 40;
+        const PLAYER_X = 50;
+
+        // Sprites: try to load the configured images; fall back to emoji if
+        // the config is null (as it is right now — no runner-*.png yet) or
+        // if the file fails to load for any reason.
+        let heroImgReady = false;
+        let obstacleImgReady = false;
+        const heroImg = new Image();
+        const obstacleImg = new Image();
+        if (siteContent.game.heroImg) {
+            heroImg.onload = () => { heroImgReady = true; };
+            heroImg.onerror = () => { heroImgReady = false; };
+            heroImg.src = siteContent.game.heroImg;
+        }
+        if (siteContent.game.obstacleImg) {
+            obstacleImg.onload = () => { obstacleImgReady = true; };
+            obstacleImg.onerror = () => { obstacleImgReady = false; };
+            obstacleImg.src = siteContent.game.obstacleImg;
+        }
+        const HERO_EMOJI = '🏃';
+        const OBSTACLE_EMOJI = '💁‍♀️';
+
+        const scoreEl = document.getElementById('game-score');
+        const highScoreEl = document.getElementById('game-highscore');
+        const playButton = document.getElementById('game-play-button');
+        const retryButton = document.getElementById('game-retry-button');
+        const gameOverScreen = document.getElementById('game-over-screen');
+        const gameOverPhraseEl = document.getElementById('game-over-phrase');
+        const gameOverScoreEl = document.getElementById('game-over-score');
+
+        let highScore = 0;
+        let player, obstacles, score, speed, elapsed, spawnTimer, running, lastTimestamp, rafId;
+
+        function resizeCanvas() {
+            const displayWidth = canvas.clientWidth;
+            if (displayWidth > 0 && canvas.width !== displayWidth) {
+                canvas.width = displayWidth;
+            }
+        }
+        window.addEventListener('resize', resizeCanvas);
+
+        function groundY() {
+            return canvas.height - GROUND_MARGIN;
+        }
+
+        function resetState() {
+            resizeCanvas();
+            player = { y: groundY() - PLAYER_SIZE, vy: 0, grounded: true };
+            obstacles = [];
+            score = 0;
+            speed = BASE_SPEED;
+            elapsed = 0;
+            spawnTimer = 1;
+            running = true;
+            lastTimestamp = null;
+            updateScoreDisplay();
+        }
+
+        function updateScoreDisplay() {
+            if (scoreEl) scoreEl.textContent = `PUNTOS: ${score}`;
+            if (highScoreEl) highScoreEl.textContent = `RÉCORD: ${highScore}`;
+        }
+
+        function jump() {
+            if (!running) return;
+            if (player.grounded) {
+                player.vy = JUMP_VELOCITY;
+                player.grounded = false;
+            }
+        }
+
+        function spawnObstacle() {
+            obstacles.push({
+                x: canvas.width,
+                y: groundY() - OBSTACLE_SIZE,
+                scored: false
+            });
+        }
+
+        function rectsOverlap(ax, ay, aw, ah, bx, by, bw, bh) {
+            return ax < bx + bw && ax + aw > bx && ay < by + bh && ay + ah > by;
+        }
+
+        function drawSprite(img, ready, emoji, x, y, size) {
+            if (ready) {
+                ctx.drawImage(img, x, y, size, size);
+            } else {
+                ctx.font = `${size}px sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(emoji, x + size / 2, y + size / 2 + 2);
+            }
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Ground line
+            ctx.strokeStyle = '#1b1b1b';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(0, groundY() + PLAYER_SIZE);
+            ctx.lineTo(canvas.width, groundY() + PLAYER_SIZE);
+            ctx.stroke();
+
+            drawSprite(heroImg, heroImgReady, HERO_EMOJI, PLAYER_X, player.y, PLAYER_SIZE);
+            obstacles.forEach(o => {
+                drawSprite(obstacleImg, obstacleImgReady, OBSTACLE_EMOJI, o.x, o.y, OBSTACLE_SIZE);
+            });
+        }
+
+        function endGame() {
+            running = false;
+            if (rafId) cancelAnimationFrame(rafId);
+            highScore = Math.max(highScore, score);
+            updateScoreDisplay();
+            const phrases = siteContent.game.gameOverFrases;
+            if (gameOverPhraseEl) {
+                gameOverPhraseEl.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+            }
+            if (gameOverScoreEl) gameOverScoreEl.textContent = `Puntos: ${score}`;
+            if (gameOverScreen) gameOverScreen.classList.remove('hidden');
+        }
+
+        function loop(timestamp) {
+            if (!running) return;
+            if (lastTimestamp === null) lastTimestamp = timestamp;
+            const dt = Math.min((timestamp - lastTimestamp) / 1000, 0.05);
+            lastTimestamp = timestamp;
+            elapsed += dt;
+            speed = BASE_SPEED + elapsed * SPEED_RAMP;
+
+            // Player physics
+            player.vy += GRAVITY * dt;
+            player.y += player.vy * dt;
+            if (player.y >= groundY() - PLAYER_SIZE) {
+                player.y = groundY() - PLAYER_SIZE;
+                player.vy = 0;
+                player.grounded = true;
+            }
+
+            // Spawn + move obstacles
+            spawnTimer -= dt;
+            if (spawnTimer <= 0) {
+                spawnObstacle();
+                const minInterval = 0.7;
+                const maxInterval = Math.max(minInterval, 1.6 - elapsed * 0.02);
+                spawnTimer = minInterval + Math.random() * (maxInterval - minInterval);
+            }
+            obstacles.forEach(o => { o.x -= speed * dt; });
+            obstacles = obstacles.filter(o => o.x + OBSTACLE_SIZE > 0);
+
+            // Scoring + collision
+            for (const o of obstacles) {
+                if (!o.scored && o.x + OBSTACLE_SIZE < PLAYER_X) {
+                    o.scored = true;
+                    score += 1;
+                    updateScoreDisplay();
+                }
+                if (rectsOverlap(PLAYER_X, player.y, PLAYER_SIZE, PLAYER_SIZE, o.x, o.y, OBSTACLE_SIZE, OBSTACLE_SIZE)) {
+                    draw();
+                    endGame();
+                    return;
+                }
+            }
+
+            draw();
+            rafId = requestAnimationFrame(loop);
+        }
+
+        function startGame() {
+            if (gameOverScreen) gameOverScreen.classList.add('hidden');
+            resetState();
+            draw();
+            rafId = requestAnimationFrame(loop);
+        }
+
+        if (playButton) playButton.addEventListener('click', startGame);
+        if (retryButton) retryButton.addEventListener('click', startGame);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' || e.code === 'ArrowUp') {
+                e.preventDefault();
+                jump();
+            }
+        });
+        canvas.addEventListener('mousedown', jump);
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            jump();
+        }, { passive: false });
+
+        // Draw an idle frame so the canvas isn't blank before the first play.
+        resizeCanvas();
+        player = { y: groundY() - PLAYER_SIZE, vy: 0, grounded: true };
+        obstacles = [];
+        draw();
+    })();
 </script>
 </body></html>
