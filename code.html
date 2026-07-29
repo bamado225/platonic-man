@@ -520,6 +520,41 @@
 <span class="material-symbols-outlined text-4xl group-hover:scale-125 transition-transform" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
 </button>
 </div>
+<!-- Hidden admin panel. Only reachable by visiting the site with #admin in
+     the URL hash — there is no link, button or visible text anywhere on
+     the site that points to it. Hiding it behind a hash is obscurity, not
+     security: the real gatekeeper is the ADMIN_PASSWORD check the server
+     does in netlify/functions/add-video.js. -->
+<div class="fixed inset-0 z-[200] bg-on-surface/80 items-center justify-center p-6" id="admin-panel" style="display: none;">
+<div class="bg-surface border-stroke-width border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] w-full max-w-md p-8">
+<h2 class="font-headline-sm text-headline-sm uppercase mb-6 text-center">Admin Panel</h2>
+
+<div id="admin-login-screen">
+<label class="font-label-bold text-label-bold uppercase block mb-2" for="admin-password-input">Password</label>
+<input class="w-full border-stroke-width border-on-surface p-3 font-body-md mb-4 focus:outline-none" id="admin-password-input" type="password"/>
+<button class="w-full bg-secondary text-on-secondary px-8 py-3 font-headline-sm text-headline-sm border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95" id="admin-login-button" type="button">
+                    Enter
+                </button>
+</div>
+
+<div class="hidden" id="admin-form-screen">
+<label class="font-label-bold text-label-bold uppercase block mb-2" for="admin-link-input">YouTube link</label>
+<input class="w-full border-stroke-width border-on-surface p-3 font-body-md mb-4 focus:outline-none" id="admin-link-input" placeholder="https://youtube.com/shorts/..." type="text"/>
+<label class="font-label-bold text-label-bold uppercase block mb-2" for="admin-title-input">Title</label>
+<input class="w-full border-stroke-width border-on-surface p-3 font-body-md mb-4 focus:outline-none" id="admin-title-input" type="text"/>
+<label class="font-label-bold text-label-bold uppercase block mb-2" for="admin-section-select">Section</label>
+<select class="w-full border-stroke-width border-on-surface p-3 font-body-md mb-4 focus:outline-none" id="admin-section-select">
+<option value="video">video</option>
+<option value="meme">meme</option>
+</select>
+<button class="w-full bg-secondary text-on-secondary px-8 py-3 font-headline-sm text-headline-sm border-stroke-width border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95" id="admin-publish-button" type="button">
+                    Publish
+                </button>
+</div>
+
+<p class="hidden font-label-bold text-label-bold mt-4 p-3 border-2 border-on-surface" id="admin-message"></p>
+</div>
+</div>
 <script>
     /* =========================================================================
        SITE CONTENT — Edit everything here to change the page's media & copy.
@@ -831,6 +866,53 @@
     }
 
     applySiteContent();
+
+    /* ---------------------------------------------------------------------
+       PUBLISHED VIDEOS: pull anything published through the hidden admin
+       panel and merge it into siteContent, then re-render. New items go
+       BEFORE what's already hardcoded. If this fails for any reason the
+       page just keeps the content it already rendered above — it must
+       never end up blank because of this.
+       --------------------------------------------------------------------- */
+    fetch('/.netlify/functions/videos')
+        .then(res => (res.ok ? res.json() : []))
+        .then(published => {
+            if (!Array.isArray(published) || published.length === 0) return;
+
+            // The "Videos" widget only has one slot (not a list), so the
+            // most recently published video (first "video" item — the
+            // store keeps newest-first) takes it over.
+            const newVideo = published.find(item => item && item.seccion === 'video' && item.id);
+            if (newVideo) {
+                const label = newVideo.titulo || newVideo.id;
+                siteContent.video = {
+                    type: 'youtube',
+                    src: newVideo.id,
+                    alt: `Platonic Man video: ${label}.`,
+                    caption: `VIDEO: "${label.toUpperCase()}"`
+                };
+            }
+
+            // Memes are a real collection — every published meme is
+            // prepended, newest first, ahead of the existing entries.
+            const newMemes = published
+                .filter(item => item && item.seccion === 'meme' && item.id)
+                .map(item => ({
+                    type: 'youtube',
+                    src: item.id,
+                    alt: `Meme of the day video: ${item.titulo || item.id}.`,
+                    label: item.titulo || 'MEME OF THE DAY',
+                    active: true
+                }));
+            if (newMemes.length > 0) {
+                siteContent.memes = newMemes.concat(siteContent.memes);
+            }
+
+            applySiteContent();
+        })
+        .catch(() => {
+            // Network or parsing error — leave the page exactly as it is.
+        });
 
     const bamButton = document.getElementById('bam-button');
     const particles = ['💔', '❤️', '🧸', '👜'];
@@ -1387,6 +1469,96 @@
         player = { y: groundY() - PLAYER_SIZE, vy: 0, grounded: true };
         obstacles = [];
         draw();
+    })();
+
+    /* ---------------------------------------------------------------------
+       ADMIN PANEL: only visible when the URL hash is exactly "#admin".
+       Screen 1 (login) just stores the typed password in an in-memory
+       variable — it does NOT validate it. The real check happens on the
+       server (add-video.js), which compares it against ADMIN_PASSWORD.
+       --------------------------------------------------------------------- */
+    (function initAdminPanel() {
+        const panel = document.getElementById('admin-panel');
+        if (!panel) return;
+
+        const loginScreen = document.getElementById('admin-login-screen');
+        const formScreen = document.getElementById('admin-form-screen');
+        const passwordInput = document.getElementById('admin-password-input');
+        const loginButton = document.getElementById('admin-login-button');
+        const linkInput = document.getElementById('admin-link-input');
+        const titleInput = document.getElementById('admin-title-input');
+        const sectionSelect = document.getElementById('admin-section-select');
+        const publishButton = document.getElementById('admin-publish-button');
+        const messageEl = document.getElementById('admin-message');
+
+        let enteredPassword = '';
+
+        function syncWithHash() {
+            panel.style.display = (window.location.hash === '#admin') ? 'flex' : 'none';
+        }
+        window.addEventListener('hashchange', syncWithHash);
+        syncWithHash();
+
+        function goToLoginScreen() {
+            if (formScreen) formScreen.classList.add('hidden');
+            if (loginScreen) loginScreen.classList.remove('hidden');
+        }
+
+        function showMessage(text, isError) {
+            if (!messageEl) return;
+            messageEl.textContent = text;
+            messageEl.classList.remove(
+                'hidden', 'border-green-700', 'bg-green-100', 'text-green-800',
+                'border-red-700', 'bg-red-100', 'text-red-800'
+            );
+            messageEl.classList.add(...(isError
+                ? ['border-red-700', 'bg-red-100', 'text-red-800']
+                : ['border-green-700', 'bg-green-100', 'text-green-800']));
+        }
+
+        if (loginButton) {
+            loginButton.addEventListener('click', () => {
+                enteredPassword = passwordInput ? passwordInput.value : '';
+                if (messageEl) messageEl.classList.add('hidden');
+                if (loginScreen) loginScreen.classList.add('hidden');
+                if (formScreen) formScreen.classList.remove('hidden');
+            });
+        }
+
+        if (publishButton) {
+            publishButton.addEventListener('click', async () => {
+                publishButton.disabled = true;
+                try {
+                    const res = await fetch('/.netlify/functions/add-video', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            password: enteredPassword,
+                            link: linkInput ? linkInput.value : '',
+                            seccion: sectionSelect ? sectionSelect.value : '',
+                            titulo: titleInput ? titleInput.value : ''
+                        })
+                    });
+                    const data = await res.json().catch(() => ({}));
+
+                    if (res.status === 401) {
+                        showMessage(data.message || 'Wrong password.', true);
+                        goToLoginScreen();
+                        if (passwordInput) passwordInput.value = '';
+                    } else if (!res.ok) {
+                        showMessage(data.message || 'Something went wrong.', true);
+                    } else {
+                        showMessage('Published!', false);
+                        if (linkInput) linkInput.value = '';
+                        if (titleInput) titleInput.value = '';
+                    }
+                } catch (err) {
+                    showMessage('Network error. Please try again.', true);
+                } finally {
+                    publishButton.disabled = false;
+                }
+            });
+        }
     })();
 </script>
 </body></html>
