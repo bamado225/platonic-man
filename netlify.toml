@@ -1,17 +1,18 @@
 [build]
   functions = "netlify/functions"
 
+# Routing. These are plain (non-forced) rewrites: Netlify serves a real file
+# or folder first (/games/, /videos/, /assets/*) and only falls back to the
+# rule when nothing exists. Never add `force = true` to the catch-all, or it
+# would swallow /games/ and /videos/. /.netlify/functions/* is handled by
+# Netlify before these rules.
 [[redirects]]
   from = "/"
   to = "/code.html"
   status = 200
 
 [[redirects]]
-  from = "/assets/*"
-  to = "/assets/:splat"
-  status = 200
-
-[[redirects]]
   from = "/*"
   to = "/code.html"
   status = 200
+  force = false

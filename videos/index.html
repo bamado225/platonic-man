@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Videos - Platonic Man</title>
+<meta name="description" content="Every Platonic Man video, in one place."/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="/assets/tailwind-config.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:wght@100..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Work+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="/assets/site.css" rel="stylesheet"/>
+</head>
+<body class="min-h-screen text-on-surface font-body-md overflow-x-hidden">
+<!-- Ticker, header, footer and the shopping-bag FAB are injected by /assets/site.js -->
+<script src="/assets/site.js"></script>
+
+<main class="max-w-7xl mx-auto px-4 md:px-panel-margin py-8 md:py-12 grid grid-cols-1 md:grid-cols-12 gap-gutter">
+
+<section class="md:col-span-12 bg-primary text-on-primary border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 md:p-10 relative" aria-labelledby="videos-title">
+  <div class="absolute top-0 left-0 bg-tertiary-fixed text-on-tertiary-fixed px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase">Now playing</div>
+  <h1 class="text-[48px] md:text-headline-lg font-headline-lg uppercase mt-6" id="videos-title">Videos</h1>
+  <p class="font-body-lg text-body-lg mt-2 max-w-2xl">Short films about long-term loneliness. Newest first.</p>
+</section>
+
+<section class="md:col-span-12" aria-label="Video list">
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter" id="video-grid" aria-live="polite"></div>
+  <div class="hidden bg-surface-container-lowest border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-10 text-center" id="video-empty">
+    <span class="material-symbols-outlined text-5xl" aria-hidden="true">videocam_off</span>
+    <p class="font-headline-sm text-[24px] sm:text-headline-sm uppercase mt-2">No videos yet. Platonic Man is camera-shy.</p>
+  </div>
+</section>
+</main>
+
+<script>
+    function el(tag, className, text) {
+        const node = document.createElement(tag);
+        if (className) node.className = className;
+        if (text !== undefined) node.textContent = text;
+        return node;
+    }
+
+    /* Same source as the homepage: videos published through the hidden admin
+       panel (Netlify Blobs, newest first) plus the video hard-coded there. */
+    PM.fetchPublished().then(published => {
+        const seen = new Set();
+        const videos = [];
+        published
+            .filter(item => item && item.seccion === 'video' && item.id)
+            .map(item => ({ id: item.id, title: item.titulo || item.id }))
+            .concat(PM.defaultVideo ? [{ id: PM.defaultVideo.id, title: PM.defaultVideo.title }] : [])
+            .forEach(v => { if (!seen.has(v.id)) { seen.add(v.id); videos.push(v); } });
+
+        const grid = document.getElementById('video-grid');
+        const empty = document.getElementById('video-empty');
+        if (videos.length === 0) {
+            grid.classList.add('hidden');
+            empty.classList.remove('hidden');
+            return;
+        }
+
+        videos.forEach(v => {
+            const card = el('article', 'relative bg-surface-container-lowest border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-gutter flex flex-col gap-gutter');
+            const frameWrap = el('div', 'relative w-full max-w-[320px] mx-auto bg-black border-4 border-on-surface');
+            frameWrap.style.aspectRatio = '9 / 16';
+            const frame = document.createElement('iframe');
+            frame.className = 'absolute inset-0 w-full h-full';
+            frame.src = `https://www.youtube.com/embed/${encodeURIComponent(v.id)}`;
+            frame.title = v.title;
+            frame.loading = 'lazy';
+            frame.allowFullscreen = true;
+            frame.setAttribute('frameborder', '0');
+            frame.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+            frameWrap.appendChild(frame);
+            card.appendChild(frameWrap);
+            card.appendChild(el('h2', 'font-headline-sm text-[22px] uppercase', v.title));
+            grid.appendChild(card);
+        });
+    });
+</script>
+</body></html>

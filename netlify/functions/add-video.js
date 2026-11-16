@@ -53,7 +53,7 @@ exports.handler = async (event) => {
     return respond(500, { message: 'ADMIN_PASSWORD is not configured on the server' });
   }
   if (password !== process.env.ADMIN_PASSWORD) {
-    return respond(401, { message: 'Contrasena incorrecta' });
+    return respond(401, { message: 'Wrong password' });
   }
 
   const id = extractYouTubeId(link);
