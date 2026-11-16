@@ -8,3 +8,6 @@ node_modules/
 
 # Full-size cover originals stay local; the site uses the .webp versions
 assets/books/*.png
+
+# Private reference assets (never published)
+_project-files/
