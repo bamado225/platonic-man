@@ -5,3 +5,6 @@ Thumbs.db
 node_modules/
 *.mp4
 .netlify/
+
+# Full-size cover originals stay local; the site uses the .webp versions
+assets/books/*.png

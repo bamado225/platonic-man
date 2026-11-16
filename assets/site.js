@@ -102,10 +102,10 @@
         : href.startsWith('/videos/') ? path.startsWith('/videos') : false;
 
     const desktopLinks = S.nav.map(l =>
-        `<a href="${l.href}" class="font-label-bold text-label-bold uppercase hover:text-primary transition-colors ${isActive(l.href) ? 'underline decoration-4 decoration-primary underline-offset-8' : ''}">${l.label}</a>`
+        `<a href="${l.href}" class="font-headline-md font-extrabold text-[18px] lg:text-[22px] leading-none uppercase hover:text-primary transition-colors ${isActive(l.href) ? 'underline decoration-4 decoration-primary underline-offset-[10px]' : ''}">${l.label}</a>`
     ).join('');
     const mobileLinks = S.nav.map(l =>
-        `<a href="${l.href}" class="px-4 py-3 border-t-4 border-on-surface font-label-bold text-label-bold uppercase hover:bg-tertiary-fixed ${isActive(l.href) ? 'bg-tertiary-fixed' : ''}">${l.label}</a>`
+        `<a href="${l.href}" class="px-4 py-3 border-t-4 border-on-surface font-headline-md font-extrabold text-[18px] leading-none uppercase hover:bg-tertiary-fixed ${isActive(l.href) ? 'bg-tertiary-fixed' : ''}">${l.label}</a>`
     ).join('');
     const tickerText = S.ticker.concat(S.ticker).join(' &nbsp;|&nbsp; ');
 
@@ -117,11 +117,11 @@
   <div class="px-4 md:px-panel-margin py-3 flex items-center justify-between gap-3">
     <a href="/" class="flex items-center gap-3 min-w-0">
       <img src="${S.favicon}" alt="${S.logo.alt}" class="hidden sm:block h-12 w-12 md:h-16 md:w-16 border-2 border-on-surface shrink-0"/>
-      <span class="font-headline-md italic uppercase text-primary text-[20px] sm:text-[32px] lg:text-headline-md leading-none whitespace-nowrap">PLATONIC MAN</span>
+      <span class="font-headline-md font-extrabold italic uppercase text-primary text-[20px] sm:text-[32px] md:text-[26px] lg:text-headline-md leading-none whitespace-nowrap">PLATONIC MAN</span>
     </a>
-    <nav class="hidden md:flex items-center gap-8" aria-label="Main">${desktopLinks}</nav>
+    <nav class="hidden md:flex items-center gap-5 lg:gap-10" aria-label="Main">${desktopLinks}</nav>
     <div class="flex items-center gap-3">
-      <button id="play-button" type="button" class="bg-secondary text-on-secondary px-5 sm:px-8 py-2 sm:py-3 font-headline-sm text-[22px] sm:text-headline-sm border-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95">PLAY!</button>
+      <button id="play-button" type="button" class="bg-secondary text-on-secondary px-5 sm:px-8 md:px-5 lg:px-8 py-2 sm:py-3 font-headline-sm font-extrabold text-[22px] sm:text-headline-sm md:text-[24px] lg:text-headline-sm border-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95">PLAY!</button>
       <button id="nav-toggle" type="button" class="md:hidden bg-surface border-4 border-on-surface w-12 h-12 flex items-center justify-center shadow-[4px_4px_0px_0px_rgba(27,27,27,1)]" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">
         <span class="material-symbols-outlined">menu</span>
       </button>
