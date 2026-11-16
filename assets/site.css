@@ -6,15 +6,6 @@ body {
     background-attachment: fixed;
     background-size: 400px;
 }
-/* Calms the busy comic background: a flat wash between the pattern and the panels. */
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    background: rgba(249, 249, 249, 0.86);
-    pointer-events: none;
-}
 
 .halftone {
     background-image: radial-gradient(circle, currentColor 1px, transparent 1px);

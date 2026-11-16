@@ -24,7 +24,7 @@
     <img class="w-full h-auto block border-4 border-on-surface bg-surface" id="hero-image"/>
   </div>
   <!-- the one rotated sticker for this panel -->
-  <div class="absolute -bottom-4 -right-2 md:-right-4 z-10 max-w-[220px] bg-tertiary-fixed text-on-tertiary-fixed border-4 border-on-surface p-3 font-label-bold text-label-bold uppercase rotate-3 shadow-[4px_4px_0px_0px_rgba(27,27,27,1)]" id="bio-status"></div>
+  <div class="absolute -bottom-4 -right-2 md:-right-4 z-10 max-w-[220px] bg-tertiary-fixed text-on-tertiary-fixed border-4 border-on-surface p-3 font-label-bold text-label-bold uppercase rotate-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]" id="bio-status"></div>
 </div>
 <div class="md:col-span-7 flex flex-col gap-gutter">
   <div class="relative bg-white border-4 border-on-surface p-6 md:p-8 shadow-[8px_8px_0px_0px_rgba(27,27,27,1)]">
@@ -32,8 +32,8 @@
     <div class="bubble-tail-left" aria-hidden="true"></div>
   </div>
   <!-- Poll -->
-  <div class="bg-white border-4 border-on-surface p-6 shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] flex flex-col md:flex-1">
-    <div class="bg-tertiary-fixed text-on-tertiary-fixed px-4 py-1 border-4 border-on-surface font-label-bold mb-6 self-start -rotate-2" id="poll-label"></div>
+  <div class="bg-tertiary-fixed border-4 border-on-surface p-6 shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] flex flex-col md:flex-1">
+    <div class="bg-secondary text-on-secondary px-4 py-1 border-4 border-on-surface font-label-bold mb-6 self-start -rotate-2" id="poll-label"></div>
     <h3 class="font-headline-sm text-[24px] md:text-headline-sm mb-6 uppercase" id="poll-question"></h3>
     <div class="space-y-4" id="poll-options">
       <button class="poll-option w-full bg-surface border-4 border-on-surface p-4 font-label-bold text-left hover:bg-primary hover:text-white transition-colors flex justify-between items-center group">
@@ -46,19 +46,19 @@
         <span class="poll-option-text"></span> <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 transition-opacity"></span>
       </button>
     </div>
-    <div class="pt-6 text-on-surface-variant italic text-sm" id="poll-footnote"></div>
+    <div class="pt-6 text-on-tertiary-fixed-variant italic text-sm" id="poll-footnote"></div>
   </div>
 </div>
 
 <!-- 4. GAG-GIFT AD -->
-<section class="md:col-span-12 relative bg-surface-container-lowest border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] pt-12 pb-6 px-6" aria-labelledby="ad-headline">
-  <div class="absolute top-0 left-0 bg-tertiary-fixed text-on-tertiary-fixed px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase">Advertisement (by me, about me)</div>
+<section class="md:col-span-12 relative bg-surface border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] pt-12 pb-6 px-6" aria-labelledby="ad-headline">
+  <div class="absolute top-0 left-0 bg-tertiary text-on-tertiary px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase">Advertisement (by me, about me)</div>
   <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
     <div class="md:col-span-7">
       <h2 class="font-headline-md text-[32px] sm:text-[40px] md:text-headline-md uppercase" id="ad-headline">The perfect gag gift for your friendzoned buddy</h2>
       <p class="font-body-lg text-body-lg mt-4">Nothing says “I see you” like a comic about a guy who is even more single than they are. Wrap it, gift it, watch them laugh-cry.</p>
       <p class="font-body-md text-body-md text-on-surface-variant mt-2">Side effects include snorting, sighing and being called “bro” by someone you like.</p>
-      <a href="#shop" class="mt-6 inline-flex items-center gap-2 bg-secondary text-on-secondary px-8 py-3 font-headline-sm text-headline-sm border-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95">
+      <a href="#shop" class="mt-6 inline-flex items-center gap-2 bg-primary text-on-primary px-8 py-3 font-headline-sm text-headline-sm border-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95">
         <span class="material-symbols-outlined">shopping_bag</span> GET IT NOW!
       </a>
     </div>
@@ -70,8 +70,8 @@
 </section>
 
 <!-- 5a. VIDEO TEASER -->
-<section class="md:col-span-6 self-start relative bg-surface-container-lowest border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 pt-12" aria-label="Latest video">
-  <a href="/videos/" class="absolute top-0 left-0 bg-tertiary-fixed text-on-tertiary-fixed px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase hover:bg-tertiary-fixed-dim">Latest video</a>
+<section class="md:col-span-6 self-start relative bg-primary-container border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 pt-12" aria-label="Latest video">
+  <a href="/videos/" class="absolute top-0 left-0 bg-tertiary text-on-tertiary px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase hover:bg-tertiary-container">Latest video</a>
   <div class="relative bg-black border-4 border-on-surface flex items-center justify-center overflow-hidden" id="video-container" style="aspect-ratio: 16 / 9;">
     <video class="absolute inset-0 w-full h-full object-contain" id="video-player" controls playsinline preload="auto"></video>
     <iframe title="Platonic Man latest video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" class="absolute inset-0 w-full h-full hidden" frameborder="0" id="video-iframe" loading="lazy"></iframe>
@@ -81,21 +81,21 @@
     <div class="absolute bottom-4 left-4 bg-white px-3 py-1 border-2 border-black font-label-bold pointer-events-none" id="video-caption"></div>
   </div>
   <div class="flex flex-wrap gap-gutter mt-gutter">
-    <button class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:bg-tertiary-fixed transition-colors" id="video-share-button">
+    <button class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:bg-tertiary transition-colors" id="video-share-button">
       <span class="material-symbols-outlined">share</span> SHARE
     </button>
-    <button class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:bg-tertiary-fixed transition-colors" id="video-like-button">
+    <button class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:bg-error hover:text-white transition-colors" id="video-like-button">
       <span class="material-symbols-outlined">heart_plus</span> LOL... PAIN
     </button>
-    <a href="/videos/" class="flex items-center gap-2 font-label-bold bg-tertiary-fixed text-on-tertiary-fixed px-4 py-2 border-2 border-black hover:translate-x-1 hover:translate-y-1 transition-transform sm:ml-auto">
+    <a href="/videos/" class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:translate-x-1 hover:translate-y-1 transition-transform sm:ml-auto">
       SEE ALL VIDEOS <span class="material-symbols-outlined">arrow_forward</span>
     </a>
   </div>
 </section>
 
 <!-- 5b. MEME OF THE DAY -->
-<section class="md:col-span-6 self-start bg-surface-container-lowest border-4 border-on-surface p-6 shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] relative anchor-offset" id="memes" aria-label="Meme of the day">
-  <div class="absolute -top-4 right-5 bg-tertiary-fixed text-on-tertiary-fixed px-6 py-2 border-4 border-on-surface font-headline-sm text-[22px] sm:text-headline-sm rotate-3 shadow-[4px_4px_0px_0px_rgba(27,27,27,1)]">
+<section class="md:col-span-6 self-start bg-surface border-4 border-on-surface p-6 shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] relative anchor-offset" id="memes" aria-label="Meme of the day">
+  <div class="absolute -top-4 right-5 bg-secondary text-on-secondary px-6 py-2 border-4 border-on-surface font-headline-sm text-[22px] sm:text-headline-sm rotate-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
     MEME OF THE DAY
   </div>
   <div class="mt-6 border-4 border-on-surface bg-white p-4">
@@ -108,10 +108,10 @@
       </button>
     </div>
     <div class="flex flex-wrap gap-gutter">
-      <button class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:bg-tertiary-fixed transition-colors" id="meme-share-button">
+      <button class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:bg-tertiary transition-colors" id="meme-share-button">
         <span class="material-symbols-outlined">share</span> <span id="meme-share-label">SHARE</span>
       </button>
-      <button class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:bg-tertiary-fixed transition-colors" id="meme-like-button">
+      <button class="flex items-center gap-2 font-label-bold bg-surface-variant px-4 py-2 border-2 border-black hover:bg-error hover:text-white transition-colors" id="meme-like-button">
         <span class="material-symbols-outlined">heart_plus</span> LOL... PAIN
       </button>
     </div>
@@ -119,8 +119,8 @@
 </section>
 
 <!-- 6. GAMES TEASER (whole strip links to /games/) -->
-<a href="/games/" class="md:col-span-12 relative block bg-surface-container-lowest border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 pt-12 hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] transition-all" aria-label="Game Zone — games coming soon">
-  <div class="absolute top-0 left-0 bg-tertiary-fixed text-on-tertiary-fixed px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase">Game Zone</div>
+<a href="/games/" class="md:col-span-12 relative block bg-surface border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 pt-12 hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] transition-all" aria-label="Game Zone — games coming soon">
+  <div class="absolute top-0 left-0 bg-secondary text-on-secondary px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase">Game Zone</div>
   <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
     <div class="bg-surface-variant border-4 border-on-surface p-4 flex flex-col items-center justify-center gap-2 aspect-[4/3]">
       <span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">lock</span>
@@ -147,26 +147,26 @@
 </a>
 
 <!-- 7. SHOP (Stripe Payment Links — PENDING). Cards are rendered from the SHOP config below. -->
-<section class="md:col-span-12 relative anchor-offset bg-surface-container-lowest border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 pt-12" id="shop" aria-labelledby="shop-title">
-  <div class="absolute top-0 left-0 bg-tertiary-fixed text-on-tertiary-fixed px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase" id="shop-caption">Secure checkout by Stripe — launching soon</div>
+<section class="md:col-span-12 relative anchor-offset bg-surface border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 pt-12" id="shop" aria-labelledby="shop-title">
+  <div class="absolute top-0 left-0 bg-tertiary text-on-tertiary px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase" id="shop-caption">Secure checkout by Stripe — launching soon</div>
   <h2 class="font-headline-md text-[32px] sm:text-headline-md uppercase" id="shop-title">The Shop</h2>
   <p class="font-label-bold text-on-surface-variant mt-1 mb-gutter" id="shop-note"></p>
   <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter" id="shop-grid"></div>
 </section>
 
 <!-- 8. NEWSLETTER (UI only — no provider connected yet) -->
-<section class="md:col-span-12 relative bg-surface-container-lowest border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 pt-12" aria-labelledby="newsletter-title">
-  <div class="absolute top-0 left-0 bg-tertiary-fixed text-on-tertiary-fixed px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase">Newsletter</div>
+<section class="md:col-span-12 relative bg-secondary-container border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 pt-12" aria-labelledby="newsletter-title">
+  <div class="absolute top-0 left-0 bg-tertiary text-on-tertiary px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase">Newsletter</div>
   <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
     <div class="md:col-span-6">
-      <h2 class="font-headline-md text-[32px] sm:text-headline-md uppercase" id="newsletter-title">One joke a week</h2>
-      <p class="font-body-lg text-body-lg text-on-surface-variant mt-2">Zero spam. Just weekly friendzone pain.</p>
+      <h2 class="font-headline-md text-[32px] sm:text-headline-md uppercase text-on-secondary-container" id="newsletter-title">One joke a week</h2>
+      <p class="font-body-lg text-body-lg text-on-secondary-container mt-2">Zero spam. Just weekly friendzone pain.</p>
     </div>
     <div class="md:col-span-6">
       <form id="newsletter-form" data-provider="TODO" class="flex flex-col sm:flex-row gap-gutter">
         <label class="sr-only" for="newsletter-email">Email address</label>
         <input class="field sm:flex-1" id="newsletter-email" name="email" type="email" placeholder="you@friendzone.com" autocomplete="email" required/>
-        <button type="submit" class="bg-tertiary-fixed text-on-tertiary-fixed px-8 py-3 font-headline-sm text-[22px] sm:text-headline-sm border-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95 whitespace-nowrap">SIGN ME UP!</button>
+        <button type="submit" class="bg-secondary text-on-secondary px-8 py-3 font-headline-sm text-[22px] sm:text-headline-sm border-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95 whitespace-nowrap">SIGN ME UP!</button>
       </form>
       <p class="hidden mt-gutter font-label-bold uppercase border-4 border-on-surface bg-tertiary-fixed text-on-tertiary-fixed p-3" id="newsletter-message" role="status" aria-live="polite">Coming soon! Nothing was saved yet — the newsletter isn't live.</p>
     </div>
@@ -263,7 +263,7 @@
 
             if (!live) {
                 // the one rotated sticker for this card
-                card.appendChild(el('div', 'absolute -top-4 -right-2 z-10 max-w-[230px] bg-tertiary-fixed text-on-tertiary-fixed border-4 border-on-surface p-2 font-label-bold text-xs uppercase rotate-3 shadow-[4px_4px_0px_0px_rgba(27,27,27,1)]', COMING_SOON_STICKER));
+                card.appendChild(el('div', 'absolute -top-4 -right-2 z-10 max-w-[230px] bg-tertiary-fixed text-on-tertiary-fixed border-4 border-on-surface p-2 font-label-bold text-xs uppercase rotate-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]', COMING_SOON_STICKER));
             }
 
             const cover = el('img', 'w-full h-auto border-4 border-on-surface bg-white');
@@ -278,7 +278,7 @@
 
             let button;
             if (live) {
-                button = el('a', 'mt-auto inline-flex items-center justify-center gap-2 bg-secondary text-on-secondary px-8 py-3 font-headline-sm text-headline-sm border-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95');
+                button = el('a', 'mt-auto inline-flex items-center justify-center gap-2 bg-primary text-on-primary px-8 py-3 font-headline-sm text-headline-sm border-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95');
                 button.href = book.stripeUrl;           // same tab, per spec
                 button.appendChild(el('span', 'material-symbols-outlined', 'shopping_bag'));
                 button.appendChild(document.createTextNode('BUY NOW'));

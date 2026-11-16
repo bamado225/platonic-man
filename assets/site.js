@@ -110,7 +110,7 @@
     const tickerText = S.ticker.concat(S.ticker).join(' &nbsp;|&nbsp; ');
 
     document.body.insertAdjacentHTML('afterbegin', `
-<div class="bg-on-surface text-tertiary-fixed h-9 leading-[28px] border-b-4 border-on-surface z-50 sticky top-0 marquee" role="marquee" aria-label="News ticker">
+<div class="bg-secondary text-on-secondary h-9 leading-[28px] border-b-4 border-on-surface z-50 sticky top-0 marquee" role="marquee" aria-label="News ticker">
   <div class="marquee-content font-label-bold text-label-bold uppercase">${tickerText}</div>
 </div>
 <header class="bg-surface border-b-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] sticky top-9 z-40">
@@ -172,9 +172,9 @@
 <footer class="bg-on-surface text-surface mt-16 border-t-4 border-on-surface p-panel-margin">
   <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
     <div class="flex items-center gap-4">
-      <div class="bg-tertiary-fixed p-2 border-2 border-white"><img src="${S.logo.src}" alt="${S.logo.alt}" class="h-10 w-10"/></div>
+      <div class="bg-secondary p-2 border-2 border-white"><img src="${S.logo.src}" alt="${S.logo.alt}" class="h-10 w-10"/></div>
       <div>
-        <h2 class="font-headline-sm text-headline-sm text-tertiary-fixed uppercase">${S.footer.brand}</h2>
+        <h2 class="font-headline-sm text-headline-sm text-secondary uppercase">${S.footer.brand}</h2>
         <p class="font-label-bold text-label-bold text-surface-variant">${S.footer.tagline}</p>
       </div>
     </div>
