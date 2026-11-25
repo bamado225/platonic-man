@@ -174,6 +174,7 @@
             }
             if (gameOverScoreEl) gameOverScoreEl.textContent = `Score: ${score}`;
             if (gameOverScreen) gameOverScreen.classList.remove('hidden');
+            if (window.PM && PM.track) PM.track('game_over', { score: score });
         }
     
         function loop(timestamp) {
@@ -233,6 +234,7 @@
         function startGame() {
             if (gameOverScreen) gameOverScreen.classList.add('hidden');
             resetState();
+            if (window.PM && PM.track) PM.track('game_start');
             draw();
             rafId = requestAnimationFrame(loop);
         }

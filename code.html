@@ -5,6 +5,18 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Platonic Man - The Friendzone Hero</title>
 <meta name="description" content="Platonic Man: the action hero who gets no action. Comics, memes, videos, games and the perfect gag gift for your friendzoned buddy."/>
+<link rel="canonical" href="https://platonicman.com/"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Platonic Man"/>
+<meta property="og:url" content="https://platonicman.com/"/>
+<meta property="og:title" content="Platonic Man — The Action Hero Who Gets No Action"/>
+<meta property="og:description" content="Cartoon books by Gary Tallman. The perfect gag gift for the guy who's always 'just a friend.' Signed sets available."/>
+<meta property="og:image" content="https://platonicman.com/assets/img/og-image.jpg"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<!-- META DOMAIN VERIFICATION: paste the tag from Meta Business settings → Domains here, e.g.
+<meta name="facebook-domain-verification" content="xxxxxxxxxxxxxxxx"/> -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script src="/assets/tailwind-config.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Anybody:wght@100..900&amp;family=Space+Grotesk:wght@300..700&amp;family=Work+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
@@ -119,43 +131,30 @@
 </section>
 
 <!-- 6. GAMES TEASER (whole strip links to /games/) -->
-<a href="/games/" class="md:col-span-12 relative block bg-surface border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 pt-12 hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] transition-all" aria-label="Game Zone — games coming soon">
+<a href="/games/" class="md:col-span-12 relative block bg-surface border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 pt-12 hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] transition-all" aria-label="Game Zone — play Friendzone Run">
   <div class="absolute top-0 left-0 bg-secondary text-on-secondary px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase">Game Zone</div>
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
-    <div class="bg-surface-variant border-4 border-on-surface p-4 flex flex-col items-center justify-center gap-2 aspect-[4/3]">
-      <span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">lock</span>
-      <span class="font-headline-sm font-extrabold text-[22px] uppercase">Game 1</span>
-      <span class="bg-tertiary-fixed text-on-tertiary-fixed border-2 border-on-surface px-2 py-0.5 font-label-bold uppercase text-xs">Coming soon</span>
+  <div class="flex flex-col sm:flex-row items-center gap-gutter">
+    <img src="/assets/img/runner-hero.png" alt="Platonic Man running" class="w-24 h-24 object-contain bg-white border-4 border-on-surface p-2 shrink-0" loading="lazy"/>
+    <div class="flex-1 text-center sm:text-left">
+      <p class="font-headline-sm font-extrabold text-[24px] sm:text-headline-sm uppercase">Friendzone Run</p>
+      <p class="font-body-md text-on-surface-variant">Dodge every "I love you like a friend." Nobody lasts long.</p>
     </div>
-    <div class="bg-surface-variant border-4 border-on-surface p-4 flex flex-col items-center justify-center gap-2 aspect-[4/3]">
-      <span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">lock</span>
-      <span class="font-headline-sm font-extrabold text-[22px] uppercase">Game 2</span>
-      <span class="bg-tertiary-fixed text-on-tertiary-fixed border-2 border-on-surface px-2 py-0.5 font-label-bold uppercase text-xs">Coming soon</span>
-    </div>
-    <div class="bg-surface-variant border-4 border-on-surface p-4 flex flex-col items-center justify-center gap-2 aspect-[4/3]">
-      <span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">lock</span>
-      <span class="font-headline-sm font-extrabold text-[22px] uppercase">Game 3</span>
-      <span class="bg-tertiary-fixed text-on-tertiary-fixed border-2 border-on-surface px-2 py-0.5 font-label-bold uppercase text-xs">Coming soon</span>
-    </div>
-    <div class="bg-surface-variant border-4 border-on-surface p-4 flex flex-col items-center justify-center gap-2 aspect-[4/3]">
-      <span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">lock</span>
-      <span class="font-headline-sm font-extrabold text-[22px] uppercase">Game 4</span>
-      <span class="bg-tertiary-fixed text-on-tertiary-fixed border-2 border-on-surface px-2 py-0.5 font-label-bold uppercase text-xs">Coming soon</span>
-    </div>
+    <span class="inline-flex items-center gap-2 bg-secondary text-on-secondary px-6 py-3 font-headline-sm font-extrabold text-[22px] border-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] whitespace-nowrap"><span class="material-symbols-outlined">sports_esports</span> PLAY NOW</span>
   </div>
-  <p class="mt-gutter font-label-bold uppercase text-on-surface-variant">Friendzone Run is playable right now. The rest are still loading. <span class="underline">Enter the Game Zone →</span></p>
 </a>
 
-<!-- 7. SHOP (Stripe Payment Links — PENDING). Cards are rendered from the SHOP config below. -->
+<!-- 7. SHOP — cards are rendered from the SHOP config below. -->
 <section class="md:col-span-12 relative anchor-offset bg-surface border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 pt-12" id="shop" aria-labelledby="shop-title">
-  <div class="absolute top-0 left-0 bg-tertiary text-on-tertiary px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase" id="shop-caption">Secure checkout by Stripe — launching soon</div>
+  <div class="absolute top-0 left-0 bg-tertiary text-on-tertiary px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase" id="shop-caption">Gift shop</div>
   <h2 class="font-headline-md font-extrabold text-[32px] sm:text-headline-md uppercase" id="shop-title">The Shop</h2>
-  <p class="font-label-bold text-on-surface-variant mt-1 mb-gutter" id="shop-note"></p>
+  <!-- S6 gift strip -->
+  <p class="mt-3 mb-gutter inline-block bg-tertiary-fixed text-on-tertiary-fixed border-4 border-on-surface px-4 py-2 font-label-bold uppercase -rotate-1 shadow-[4px_4px_0px_0px_rgba(27,27,27,1)]" id="gift-strip">🎁 Perfect for Secret Santa · Signed by the author · Order signed copies by Dec 14</p>
   <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter" id="shop-grid"></div>
+  <p class="font-label-bold text-on-surface-variant mt-gutter" id="shop-note"></p>
 </section>
 
-<!-- 8. NEWSLETTER (UI only — no provider connected yet) -->
-<section class="md:col-span-12 relative bg-secondary-container border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 pt-12" aria-labelledby="newsletter-title">
+<!-- 8. NEWSLETTER (UI only — no provider connected yet). HIDDEN until MailerLite is connected: remove the "hidden" class below. -->
+<section class="hidden md:col-span-12 relative bg-secondary-container border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-6 pt-12" aria-labelledby="newsletter-title">
   <div class="absolute top-0 left-0 bg-tertiary text-on-tertiary px-4 py-1 border-r-4 border-b-4 border-on-surface font-label-bold uppercase">Newsletter</div>
   <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter items-center">
     <div class="md:col-span-6">
@@ -212,40 +211,47 @@
 
 <script>
     /* =========================================================================
-       SHOP CONFIG — going live = set stripeReady to true and paste each book's
-       Stripe Payment Link into stripeUrl. Cards render from this object.
+       SHOP CONFIG — cards render from this object.
+       Signed Set: paste the Stripe Payment Link into signedSet.stripeUrl.
+       While it's empty the Signed Set card stays hidden and only the two
+       Amazon cards show.
        ========================================================================= */
     const SHOP = {
-        stripeReady: false, // TODO: flip to true once Stripe is set up
-        showAmazon: true,   // show the small "Also on Amazon →" link under each BUY button
-        signedNote: "Signed copies shipped by the author.", // TODO: confirm shipping details / wording
+        note: "Paperbacks ship from Amazon. Signed sets ship from Gary via USPS (US only).",
+        signedSet: {
+            id: "signed-set",
+            title: "Signed Set: Books 1 & 2",
+            subtitle: "Signed by Gary Tallman",
+            pitch: "Both books, signed by Gary Tallman. The gag gift for the guy who's always \"just a friend.\"",
+            price: "$19.99",
+            priceNote: "+ $3 US shipping",
+            value: 22.99,          // price + shipping, sent with InitiateCheckout
+            extra: "Secure checkout by Stripe · Add a name to sign it to and a gift note.",
+            stripeUrl: ""          // TODO: Stripe Payment Link (https://buy.stripe.com/...)
+        },
         books: [
             {
                 id: "book-1",
                 title: "The Slightly Amorous Adventures of Hugh Moore aka Platonic Man",
-                subtitle: "The Action Hero Who Gets No Action",
-                pitch: "TODO: one-line pitch for this book.",          // TODO
-                price: "TODO: $0.00",                                  // TODO
+                subtitle: "Book One — The Action Hero Who Gets No Action",
+                pitch: "The superhero who saves the day and still gets friend-zoned. Single-panel cartoons from a CRACKED humor writer.",
+                price: "$12.99",
                 cover: "/assets/books/book1-cover.webp",
                 coverSize: [1600, 1164],
-                amazonUrl: "https://www.amazon.com/dp/B0GYRGYB1X",
-                stripeUrl: ""                                          // TODO: Stripe Payment Link (https://buy.stripe.com/...)
+                amazonUrl: "https://www.amazon.com/dp/B0GYRGYB1X"
             },
             {
                 id: "book-2",
                 title: "The Continuing Adventures of Platonic Man",
                 subtitle: "Book Two — The \"Companion\" Volume",
-                pitch: "TODO: one-line pitch for this book.",          // TODO
-                price: "TODO: $0.00",                                  // TODO
+                pitch: "Platonic Man is back. Same cape, same luck. More cartoons about the hero women only want as a friend.",
+                price: "$12.99",
                 cover: "/assets/books/book2-cover.webp",
                 coverSize: [1600, 900],
-                amazonUrl: "https://www.amazon.com/dp/B0HPQ7GWS5",
-                stripeUrl: ""                                          // TODO: Stripe Payment Link (https://buy.stripe.com/...)
+                amazonUrl: "https://www.amazon.com/dp/B0HPQ7GWS5"
             }
         ]
     };
-
-    const COMING_SOON_STICKER = "COMING SOON — GARY IS STILL FIGHTING THE PAYMENT VILLAINS";
 
     function el(tag, className, text) {
         const node = document.createElement(tag);
@@ -254,66 +260,90 @@
         return node;
     }
 
+    const BTN = 'mt-auto inline-flex items-center justify-center gap-2 px-4 py-3 font-headline-sm font-extrabold text-[20px] lg:text-[22px] whitespace-nowrap border-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95';
+
+    function coverImg(src, size, alt, extra) {
+        const img = el('img', extra || 'w-full h-full object-contain block');
+        img.src = src;
+        if (size) { img.width = size[0]; img.height = size[1]; }
+        img.alt = alt;
+        img.loading = 'lazy';
+        return img;
+    }
+
+    function cardText(card, item) {
+        const heading = el('div', 'flex flex-col gap-1');
+        heading.appendChild(el('h3', 'font-headline-sm font-extrabold text-[22px] md:text-[24px] uppercase leading-tight', item.title));
+        if (item.subtitle) heading.appendChild(el('p', 'font-label-bold text-label-bold uppercase text-on-surface-variant', item.subtitle));
+        card.appendChild(heading);
+        card.appendChild(el('p', 'font-body-md text-on-surface-variant', item.pitch));
+        const price = el('p', 'font-headline-md font-extrabold text-[32px] md:text-[40px] leading-none');
+        price.textContent = item.price;
+        if (item.priceNote) price.appendChild(el('span', 'ml-2 font-label-bold text-label-bold text-on-surface-variant align-middle', item.priceNote));
+        card.appendChild(price);
+    }
+
     function renderShop() {
         const grid = document.getElementById('shop-grid');
         const note = document.getElementById('shop-note');
-        if (note) note.textContent = SHOP.signedNote;
+        if (note) note.textContent = SHOP.note;
         if (!grid) return;
         grid.textContent = '';
 
+        const set = SHOP.signedSet;
+        const setLive = /^https:\/\/buy\.stripe\.com\//.test(set.stripeUrl || '');
+        const span = setLive ? 'md:col-span-4' : 'md:col-span-6';
+        
         SHOP.books.forEach(book => {
-            // A real checkout needs the flag AND an https Payment Link.
-            const live = SHOP.stripeReady === true && /^https:\/\//.test(book.stripeUrl || '');
-
-            const card = el('article', 'md:col-span-6 relative bg-white border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-gutter flex flex-col gap-gutter');
+            const card = el('article', span + ' relative bg-white border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-gutter flex flex-col gap-gutter');
             card.dataset.bookId = book.id;
-
-            if (!live) {
-                // the one rotated sticker for this card
-                card.appendChild(el('div', 'absolute -top-4 -right-2 z-10 max-w-[230px] bg-tertiary-fixed text-on-tertiary-fixed border-4 border-on-surface p-2 font-label-bold text-xs uppercase rotate-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]', COMING_SOON_STICKER));
-            }
-
-            // Fixed frame so both cards line up; object-contain keeps the whole cover visible.
             const frame = el('div', 'w-full aspect-[1.38/1] border-4 border-on-surface bg-white');
-            const cover = el('img', 'w-full h-full object-contain block');
-            cover.src = book.cover;
-            if (book.coverSize) { cover.width = book.coverSize[0]; cover.height = book.coverSize[1]; }
-            cover.alt = `${book.title} by Gary Tallman`;
-            cover.loading = 'lazy';
-            frame.appendChild(cover);
+            frame.appendChild(coverImg(book.cover, book.coverSize, `${book.title} by Gary Tallman`));
             card.appendChild(frame);
+            cardText(card, book);
 
-            const heading = el('div', 'flex flex-col gap-1');
-            heading.appendChild(el('h3', 'font-headline-sm font-extrabold text-[22px] md:text-[26px] uppercase leading-tight', book.title));
-            if (book.subtitle) heading.appendChild(el('p', 'font-label-bold text-label-bold uppercase text-on-surface-variant', book.subtitle));
-            card.appendChild(heading);
-            card.appendChild(el('p', 'font-body-md text-on-surface-variant', book.pitch));
-            card.appendChild(el('p', 'font-headline-md font-extrabold text-[32px] md:text-headline-md', book.price));
-
-            let button;
-            if (live) {
-                button = el('a', 'mt-auto inline-flex items-center justify-center gap-2 bg-primary text-on-primary px-8 py-3 font-headline-sm text-headline-sm border-4 border-on-surface shadow-[4px_4px_0px_0px_rgba(27,27,27,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:scale-95');
-                button.href = book.stripeUrl;           // same tab, per spec
-                button.appendChild(el('span', 'material-symbols-outlined', 'shopping_bag'));
-                button.appendChild(document.createTextNode('BUY NOW'));
-            } else {
-                button = el('button', 'btn-disabled mt-auto inline-flex items-center justify-center gap-2 px-8 py-3 font-headline-sm font-extrabold text-[22px] sm:text-headline-sm border-4', 'CHECKOUT OPENING SOON');
-                button.type = 'button';
-                button.setAttribute('aria-disabled', 'true');
-                button.addEventListener('click', e => e.preventDefault());
-            }
-            card.appendChild(button);
-
-            // Secondary link — shown in both the pending and the live Stripe state.
-            if (SHOP.showAmazon && /^https:\/\//.test(book.amazonUrl || '')) {
-                const amazon = el('a', 'self-center font-label-bold text-label-bold uppercase underline underline-offset-4 decoration-2 hover:text-primary', 'Also on Amazon →');
-                amazon.href = book.amazonUrl;
-                amazon.target = '_blank';
-                amazon.rel = 'noopener noreferrer';
-                card.appendChild(amazon);
-            }
+            const btn = el('a', BTN + ' bg-primary text-on-primary');
+            btn.href = book.amazonUrl;
+            btn.target = '_blank';
+            btn.rel = 'noopener noreferrer';
+            btn.appendChild(el('span', 'material-symbols-outlined', 'shopping_cart'));
+            btn.appendChild(document.createTextNode('BUY ON AMAZON'));
+            btn.addEventListener('click', () => PM.track('click_amazon', { book_id: book.id, location: 'shop' }));
+            card.appendChild(btn);
             grid.appendChild(card);
         });
+
+        if (setLive) {
+            const card = el('article', span + ' relative bg-tertiary-fixed border-4 border-on-surface shadow-[8px_8px_0px_0px_rgba(27,27,27,1)] p-gutter flex flex-col gap-gutter');
+            card.dataset.bookId = set.id;
+            card.appendChild(el('div', 'absolute -top-4 -right-2 z-10 bg-secondary text-on-secondary border-4 border-on-surface px-3 py-1 font-label-bold text-xs uppercase rotate-3 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]', '✍️ Signed by the author'));
+            const frame = el('div', 'relative w-full aspect-[1.38/1] border-4 border-on-surface bg-white overflow-hidden');
+            frame.appendChild(coverImg(SHOP.books[0].cover, SHOP.books[0].coverSize, 'Book 1 cover', 'absolute left-[4%] top-[6%] w-[62%] h-auto -rotate-3 border-2 border-on-surface'));
+            frame.appendChild(coverImg(SHOP.books[1].cover, SHOP.books[1].coverSize, 'Book 2 cover', 'absolute right-[4%] bottom-[6%] w-[62%] h-auto rotate-3 border-2 border-on-surface'));
+            card.appendChild(frame);
+            cardText(card, set);
+
+            const btn = el('a', BTN + ' bg-secondary text-on-secondary');
+            btn.href = set.stripeUrl;           // same tab
+            btn.appendChild(el('span', 'material-symbols-outlined', 'shopping_bag'));
+            btn.appendChild(document.createTextNode('BUY SIGNED SET'));
+            btn.addEventListener('click', () => PM.track('InitiateCheckout', { content_ids: [set.id], value: set.value, currency: 'USD' }));
+            card.appendChild(btn);
+            card.appendChild(el('p', 'font-label-bold text-xs uppercase text-center text-on-tertiary-fixed', set.extra));
+            grid.appendChild(card);
+        }
+
+        // shop_view (Meta ViewContent) — once, when the shop scrolls into view.
+        const shop = document.getElementById('shop');
+        if (shop && 'IntersectionObserver' in window) {
+            const io = new IntersectionObserver(entries => {
+                if (entries.some(e => e.isIntersecting)) {
+                    PM.track('shop_view', { content_ids: ['book-1', 'book-2'].concat(setLive ? [set.id] : []), content_type: 'product' });
+                    io.disconnect();
+                }
+            }, { threshold: 0.3 });
+            io.observe(shop);
+        }
     }
     renderShop();
 
