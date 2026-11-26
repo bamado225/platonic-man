@@ -234,7 +234,6 @@
                 title: "The Slightly Amorous Adventures of Hugh Moore aka Platonic Man",
                 subtitle: "Book One — The Action Hero Who Gets No Action",
                 pitch: "The superhero who saves the day and still gets friend-zoned. Single-panel cartoons from a CRACKED humor writer.",
-                price: "$12.99",
                 cover: "/assets/books/book1-cover.webp",
                 coverSize: [1600, 1164],
                 amazonUrl: "https://www.amazon.com/dp/B0GYRGYB1X"
@@ -244,7 +243,6 @@
                 title: "The Continuing Adventures of Platonic Man",
                 subtitle: "Book Two — The \"Companion\" Volume",
                 pitch: "Platonic Man is back. Same cape, same luck. More cartoons about the hero women only want as a friend.",
-                price: "$12.99",
                 cover: "/assets/books/book2-cover.webp",
                 coverSize: [1600, 900],
                 amazonUrl: "https://www.amazon.com/dp/B0HPQ7GWS5"
@@ -276,6 +274,7 @@
         if (item.subtitle) heading.appendChild(el('p', 'font-label-bold text-label-bold uppercase text-on-surface-variant', item.subtitle));
         card.appendChild(heading);
         card.appendChild(el('p', 'font-body-md text-on-surface-variant', item.pitch));
+        if (!item.price) return;
         const price = el('p', 'font-headline-md font-extrabold text-[32px] md:text-[40px] leading-none');
         price.textContent = item.price;
         if (item.priceNote) price.appendChild(el('span', 'ml-2 font-label-bold text-label-bold text-on-surface-variant align-middle', item.priceNote));
