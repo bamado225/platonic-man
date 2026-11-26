@@ -48,8 +48,8 @@
        so you can test events before going live.
        ------------------------------------------------------------------ */
     PM.config = {
-        metaPixelId: '',   // e.g. '123456789012345' (Meta Events Manager → Dataset ID)
-        ga4Id: ''          // e.g. 'G-ABC123XYZ' (GA4 → Data stream → Measurement ID)
+        metaPixelId: '1500665641982291',   // e.g. '123456789012345' (Meta Events Manager → Dataset ID)
+        ga4Id: 'G-3Z7BJXHGEY'          // e.g. 'G-ABC123XYZ' (GA4 → Data stream → Measurement ID)
     };
 
     (function initTracking() {
