@@ -36,7 +36,8 @@
             tiktok: ''
         },
         footerLinks: [
-            { label: 'Privacy Policy', href: '/privacy/' }
+            { label: 'Privacy Policy', href: '/privacy/' },
+            { label: 'Shipping & Returns', href: '/policies/' }
         ],
         contactEmail: 'hello@platonicman.com'
     };
